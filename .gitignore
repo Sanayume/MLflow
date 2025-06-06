@@ -1,0 +1,5 @@
+.env
+autoMLenv/
+# Ignore Python cache files
+__pycache__/
+ai_workspace/

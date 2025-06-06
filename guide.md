@@ -1,12 +1,10 @@
-好的，我们正式开始撰写您的第一份AI Agent学习手册！我会竭尽所能，将每个知识点都讲得非常非常详细，确保您能透彻理解。我们不必追求一次完成很多内容，而是把当前讲解的部分吃透。
+# AI Agent 学习手册：从LangChain入门到MCP整合
 
-**AI Agent 学习手册：从LangChain入门到MCP整合**
+## 第一部分：AI Agent 与 LangChain 基础入门
 
-**第一部分：AI Agent 与 LangChain 基础入门**
+### 第1章：欢迎来到AI Agent的世界**
 
-**第1章：欢迎来到AI Agent的世界**
-
-**1.1 什么是AI Agent？（超越聊天机器人）**
+#### 1.1 什么是AI Agent？（超越聊天机器人）**
 
 欢迎踏入AI Agent的奇妙领域！这可能是您在人工智能旅程中一个激动人心的新起点。在我们深入技术细节之前，首先需要清晰地理解“AI Agent”究竟是什么，以及它与我们可能已经熟悉的“聊天机器人”有何不同。
 
@@ -88,7 +86,7 @@ AI Agent是能够**自主感知环境、进行决策并采取行动以达成特�
 
 希望通过这一节的详细介绍，您对“AI Agent是什么”已经有了一个清晰的初步印象。在接下来的章节中，我们将探讨为什么LLM是构建现代Agent的理想“大脑”，以及LangChain这个强大的框架如何帮助我们轻松地将这些理念付诸实践。
 
-**1.2 为什么需要大型语言模型（LLM）作为Agent的“大脑”？**
+#### 1.2 为什么需要大型语言模型（LLM）作为Agent的“大脑”？
 
 在上一节中，我们探讨了AI Agent的核心特征：自主性、感知、决策和行动。其中，“决策”是Agent智能的核心体现，它涉及到对任务的理解、规划、推理以及对行动策略的选择。那么，为什么现代AI Agent，尤其是我们接下来要学习构建的这类Agent，几乎都选择大型语言模型（LLM）作为其核心的“大脑”或“推理引擎”呢？答案在于LLM近年来展现出的数项革命性能力。
 
@@ -146,9 +144,7 @@ AI Agent是能够**自主感知环境、进行决策并采取行动以达成特�
 
 在下一章，我们将正式开始接触LangChain，看看它是如何帮助我们优雅地将LLM、工具、记忆等组件“粘合”在一起，构建出我们自己的AI Agent的。
 
-好的，我们继续学习手册的下一节。
-
-**1.3 什么是LangChain？它如何帮助我们构建Agent？**
+#### 1.3 什么是LangChain？它如何帮助我们构建Agent？
 
 在理解了AI Agent是什么以及为什么LLM是其理想的“大脑”之后，我们自然会遇到一个实际问题：如何才能高效地将LLM的强大能力与我们期望Agent执行的各种操作（调用工具、记住对话、查询数据等）结合起来呢？从零开始编写所有这些“胶水代码”和控制逻辑将是一项非常复杂和耗时的工作。
 
@@ -248,9 +244,7 @@ LangChain是一个强大的开源框架，通过其**模块化**和**可组合�
 
 接下来，我们将进入1.4节，进行实际的环境准备，并运行第一个简单的LangChain示例，让您对它有一个更直观的感受。
 
-好的，我们继续1.4节，开始动手实践！
-
-**1.4 环境准备与第一个“Hello, LangChain!”**
+#### 1.4 环境准备与第一个“Hello, LangChain!”
 
 理论学习固然重要，但没有什么比亲自动手实践更能加深理解了。在这一节中，我们将一起完成运行第一个LangChain程序所需的环境准备工作，并编写一个非常简单的示例，让您对LangChain代码有一个初步的直观感受。
 
@@ -538,13 +532,11 @@ AI历史学家的解释:
 
 我们已经完成了1.4节。请花些时间理解代码的每一部分，并尝试修改它，例如改变系统消息、用户问题，或者 `concept_to_explain` 的值，看看会发生什么。
 
-好的，我们正式进入学习手册的第二章，开始深入探索LangChain的核心组件。这些组件是我们后续构建复杂AI Agent的基石。
-
-**第二章：LangChain核心组件详解（上）- LLMs, Prompts & Chains**
+### 第二章：LangChain核心组件详解（上）- LLMs, Prompts & Chains
 
 在第一章的 "Hello, LangChain!" 示例中，我们已经初步接触了`ChatOpenAI`（一种LLM封装）、`ChatPromptTemplate`（一种Prompt封装）以及将它们连接起来的简单“链”。现在，我们将更系统、更详细地学习这些组件。
 
-**2.1 LLMs（大型语言模型）模块**
+#### 2.1 LLMs（大型语言模型）模块
 
 LangChain的 `Models` 模块是其与各种大型语言模型进行交互的核心接口。它对不同模型提供商的API进行了抽象和封装，使得开发者可以用一种相对统一的方式来使用它们。
 
@@ -716,9 +708,7 @@ LangChain的`Models`模块为我们提供了与各种LLM（特别是`ChatModel`�
 
 下一节（2.2），我们将深入探讨LangChain的`Prompts`模块，学习如何更精细地控制发送给LLM的指令，这是发挥LLM潜能的关键。
 
-好的，我们继续深入LangChain的核心组件。
-
-**2.2 Prompts（提示工程）模块**
+#### 2.2 Prompts（提示工程）模块
 
 在与大型语言模型（LLM）交互时，我们发送给模型的输入——即“提示”（Prompt）——对其输出的质量和相关性起着决定性的作用。可以把提示想象成你给一位非常聪明但需要明确指导的实习生的任务指令。指令越清晰、越具体、包含越多的上下文信息，实习生完成任务的效果就越好。
 
@@ -1035,9 +1025,7 @@ LangChain的`Prompts`模块是与LLM高效沟通的关键。我们学习了：
 
 接下来，我们将学习LangChain的第三个核心组件：`Chains`（链）模块。我们将看到如何将我们已经学习的LLMs和Prompts（以及后续的Tools和Memory）有机地串联起来，构建出复杂的执行流程。
 
-好的，我们继续深入LangChain的核心组件。
-
-**2.3 Chains（链）模块**
+#### 2.3 Chains（链）模块
 
 在前面的章节中，我们已经学习了如何使用LangChain的`Models`模块与LLM进行交互，以及如何使用`Prompts`模块精心构造发送给LLM的指令。然而，很多有用的LLM应用程序并不仅仅是单一的LLM调用。它们通常涉及到一系列的调用，或者将LLM的调用与其他操作（如数据检索、工具使用、状态管理等）结合起来。
 
@@ -1328,15 +1316,13 @@ LangChain的`Chains`模块是组织和执行LLM调用及其他操作序列的核
 
 接下来，在第二部分的第三章，我们将学习LangChain的另外几个核心组件：`Tools`（这对于Agent至关重要！）、`Memory`（让Agent拥有记忆）以及`Indexes`（让Agent能够利用外部知识）。
 
-好的，我们继续深入LangChain的核心组件，进入激动人心的Agent构建基石部分。
+## 第二部分：深入LangChain AI Agent开发
 
-**第二部分：深入LangChain AI Agent开发**
-
-**第3章：LangChain核心组件详解（下）- Tools, Memory & Indexes**
+### 第3章：LangChain核心组件详解（下）- Tools, Memory & Indexes**
 
 在掌握了如何与LLM交互（Models）、如何精心设计指令（Prompts）以及如何将这些操作串联起来（Chains）之后，我们现在要学习的是让我们的LLM应用真正“动起来”并“记住事情”的关键组件：Tools（工具）、Memory（记忆）和Indexes（索引，用于外部知识）。这些组件，特别是Tools，是构建能够与外部世界交互并执行具体任务的AI Agent的核心。
 
-**3.1 Tools（工具）模块**
+#### 3.1 Tools（工具）模块
 
 到目前为止，我们构建的链主要还是在LLM的“想象空间”里进行文本生成和转换。但是，AI Agent的强大之处在于它能够**采取行动**，影响外部世界或从外部世界获取信息。**Tools（工具）就是LangChain中赋予LLM这种行动能力的接口。**
 
@@ -1638,9 +1624,7 @@ LangChain的`Tools`模块是赋予AI Agent行动能力的关键。
 
 下一节（3.2），我们将学习`Memory`（记忆）模块，让我们的Agent能够“记住”之前的对话和信息，从而进行更连贯和有上下文的交互。
 
-好的，我们继续学习LangChain的核心组件。
-
-**3.2 Memory（记忆）模块**
+#### 3.2 Memory（记忆）模块 
 
 到目前为止，我们讨论的LLM调用和链的执行，在某种程度上是“无状态的”。也就是说，每次调用都是相对独立的，LLM（或链）默认情况下不会“记住”之前的交互内容。想象一下，如果你和一个每次跟你说话都像是第一次见面的人交流，那体验会非常糟糕。
 
@@ -1834,9 +1818,7 @@ LangChain的`Memory`模块赋予了Chain和Agent“记住”过去交互的能�
 
 接下来，我们将学习本章最后一个核心组件：`Indexes`（索引）与`Retrieval`（检索）模块，这将使我们的Agent能够访问和利用外部的、自定义的知识库。
 
-好的，我们继续学习LangChain的最后一个核心基础组件。
-
-**3.3 Indexes（索引）与Retrieval（检索）模块 - RAG基础**
+#### 3.3 Indexes（索引）与Retrieval（检索）模块 - RAG基础
 
 到目前为止，我们已经让AI Agent拥有了“大脑”（LLM）、“指令系统”（Prompts）、“行动流程”（Chains）、“工具箱”（Tools）以及“短期记忆”（Memory）。但是，如果Agent只能依赖LLM预训练时所包含的知识（这些知识有截止日期且可能不包含特定领域的私有数据）和短暂的对话记忆，那么它的能力仍然是有限的。
 
@@ -2127,11 +2109,9 @@ LangChain的`Indexes`与`Retrieval`模块是实现RAG（检索增强生成）的
 
 请花些时间回顾和消化这些内容，特别是`Tools`的创建和`RAG`的基本流程。准备好后，我们就可以进入激动人心的Agent构建实战了！
 
-好的，我们现在进入手册中最令人期待的部分之一：将前面学习到的所有LangChain核心组件整合起来，构建我们的第一个能够自主思考和行动的AI Agent！
+## 第四部分：构建你的第一个LangChain AI Agent
 
-**第四部分：构建你的第一个LangChain AI Agent** (由于内容较多，我们先从4.1和4.2开始)
-
-**第4章：构建你的第一个LangChain AI Agent**
+### 第4章：构建你的第一个LangChain AI Agent
 
 在前面的章节中，我们已经分别学习了：
 
@@ -2144,7 +2124,7 @@ LangChain的`Indexes`与`Retrieval`模块是实现RAG（检索增强生成）的
 
 现在，是时候将这些强大的“积木块”组合起来，搭建一个真正的**AI Agent**了。
 
-**4.1 Agent的核心循环：Observation, Thought, Action, Observation (ReAct等思想)**
+#### 4.1 Agent的核心循环：Observation, Thought, Action, Observation (ReAct等思想)
 
 在深入LangChain的具体Agent实现之前，理解Agent工作的基本模式或“心智模型”非常重要。许多成功的Agent框架，包括LangChain中的一些Agent类型，都借鉴了一种被称为**ReAct (Reason and Act)** 的思想。
 
@@ -2191,7 +2171,7 @@ ReAct模式的核心在于让LLM交替进行**推理 (Reasoning)** 和 **行动 
 
 LangChain中的一些Agent类型（如基于ReAct范式的Agent）会明确地在LLM的输出中体现“Thought”和“Action”这两个部分。
 
-**4.2 LangChain中不同类型的Agent**
+#### 4.2 LangChain中不同类型的Agent
 
 LangChain提供了多种预定义的Agent类型（AgentType），它们在底层的LLM、提示设计、以及与工具交互的方式上有所不同。选择合适的Agent类型取决于你的具体需求、所使用的LLM以及你希望Agent如何行动。
 
@@ -2266,9 +2246,7 @@ LangChain提供了多种预定义的Agent类型（AgentType），它们在底层
 
 在下一节（4.3），我们将真正开始编写代码，使用`create_openai_tools_agent`函数，结合我们之前学习的LLM、Tools和Prompts组件，一步步构建起我们的第一个能够调用自定义工具的AI Agent！这将会非常有趣。
 
-好的，我们终于来到了激动人心的实战环节！现在我们要将前面学习到的所有知识点——LLM、Prompts、Tools以及Agent的核心理念——整合起来，使用LangChain的`create_openai_tools_agent`函数构建我们的第一个能够调用自定义工具的AI Agent。
-
-**4.3 使用`create_openai_tools_agent`构建现代Agent (重点)**
+#### 4.3 使用`create_openai_tools_agent`构建现代Agent (重点)
 
 `create_openai_tools_agent`是LangChain提供的一个便捷函数，专门用于构建利用OpenAI模型内置的**Tool Calling**能力的Agent。这种Agent被认为是目前与OpenAI模型交互以执行工具的最高效和最可靠的方式。
 
@@ -2664,9 +2642,7 @@ Stderr:
 
 在下一节（4.4和4.5），我们将讨论Agent的调用与交互细节，以及如何调试Agent，处理它可能出现的错误。
 
-好的，我们继续深入AI Agent的构建与使用。现在我们已经成功搭建并运行了第一个Agent，接下来我们将更详细地探讨如何与Agent进行交互，以及在开发和调试过程中可能遇到的一些问题和技巧。
-
-**4.4 Agent的调用与交互 (`agent_executor.invoke()`)**
+#### 4.4 Agent的调用与交互 (`agent_executor.invoke()`)
 
 在上一节的Streamlit应用中，我们使用了`agent_executor.invoke({"input": user_input})`来触发Agent的执行。`.invoke()`是LangChain Runnable接口（AgentExecutor实现了这个接口）的核心方法之一，用于执行链或Agent并获取其最终结果。
 
@@ -2774,7 +2750,7 @@ Stderr:
     *   当Agent调用了改变这个状态的工具（如`change_ai_directory`），该工具函数会直接修改`st.session_state`中的值。Streamlit的响应式特性会使得UI（如侧边栏显示的当前目录）自动更新。
     *   这种方式适用于UI驱动的、单用户会话的场景。如果是在一个无UI的后端Agent服务中，你可能需要用其他方式来管理这种特定于Agent实例或会话的状态（例如，在Agent类中作为实例变量，或者使用外部存储如Redis）。
 
-**4.5 调试Agent：理解Agent的思考过程和处理错误**
+#### 4.5 调试Agent：理解Agent的思考过程和处理错误
 
 构建和调试AI Agent可能是一个迭代和富有挑战性的过程，因为它们的行为部分由不完全可预测的LLM驱动。以下是一些关键的调试技巧和需要注意的方面：
 
@@ -2910,13 +2886,11 @@ Stderr:
 
 请您花时间消化这些内容，特别是亲自动手修改代码、尝试不同的交互、并观察`verbose`输出或使用LangSmith进行调试。
 
-好的，我们继续学习手册的下一部分，深入探讨一些高级的Agent技巧和定制方法，让我们的AI Agent变得更加强大、智能和可控。
-
-**第五章：高级Agent技巧与定制**
+### 第五章：高级Agent技巧与定制
 
 在第四章中，我们成功构建并运行了第一个AI Agent。现在，我们将探索一些更高级的技术，以增强Agent的功能、改善其性能、并更好地控制其行为。
 
-**5.1 Agent的中间步骤处理与自定义输出 (`agent_scratchpad`)**
+#### 5.1 Agent的中间步骤处理与自定义输出 (`agent_scratchpad`)
 
 我们之前在创建Agent的Prompt时使用了一个特殊的占位符：`MessagesPlaceholder(variable_name="agent_scratchpad")`。这个“暂存区”（scratchpad）对于Agent的运作至关重要，特别是对于那些需要多轮“思考-行动-观察”循环的Agent（如ReAct类型的Agent，或者OpenAI Tools Agent在内部进行多工具调用决策时）。
 
@@ -2998,7 +2972,7 @@ Stderr:
     ```
     **注意**: 自定义Agent的输出解析器是一个高级操作，需要对LangChain的内部工作机制（特别是LCEL和Agent的构成）有更深入的理解。对于大多数情况，默认的输出格式或通过`return_intermediate_steps`获取信息已经足够。
 
-**5.2 自定义Agent的停止条件**
+#### 5.2 自定义Agent的停止条件
 
 `AgentExecutor`默认会在LLM生成一个它认为是“Final Answer”的输出时停止（即解析为`AgentFinish`时）。但有时你可能需要更精细地控制Agent何时停止：
 
@@ -3024,7 +2998,7 @@ Stderr:
 *   **自定义停止函数 (通过Callbacks或自定义AgentExecutor)**:
     *   对于非常复杂的停止条件（例如，当某个外部状态满足时，或者当Agent连续N次犯同一种错误时），你可能需要在回调中检查这些条件，并主动抛出一个特殊的异常来终止Agent的执行，或者修改AgentExecutor的内部循环逻辑（这非常高级）。
 
-**5.3 处理Agent执行过程中的错误和幻觉**
+#### 5.3 处理Agent执行过程中的错误和幻觉
 
 AI Agent的执行并不总是一帆风顺。错误可能来自LLM本身（幻觉、格式错误）、工具的执行（API失败、代码错误、资源不可用），或者Agent的决策逻辑。
 
@@ -3061,7 +3035,7 @@ AI Agent的执行并不总是一帆风顺。错误可能来自LLM本身（幻觉
 *   **`return_ पूरा_llm_output` (更名为 `return_intermediate_steps` 的一部分或通过Callbacks)**:
     *   在一些早期的LangChain版本或特定场景中，获取LLM的完整原始输出（包括它可能生成的“Thought”文本和选择的工具等）对于理解其决策非常重要。现在这部分信息通常通过 `verbose=True` 打印，或者包含在 `intermediate_steps` 的`AgentAction.log` 中，或者通过Callbacks捕获。
 
-**5.4 流式输出Agent的响应 (Streaming)**
+#### 5.4 流式输出Agent的响应 (Streaming)
 
 我们在4.4节已经初步探讨了流式输出。对于Agent来说，实现真正的端到端流式输出（即从Agent的第一个思考片段到最终的回复都逐步展现给用户）会更加复杂，因为它涉及到：
 
@@ -3080,7 +3054,7 @@ LangChain的 `.stream()` 方法旨在提供这种能力，它会产生一系列�
 
 LangChain社区和文档中通常会有关于如何处理Agent流式输出的最佳实践和示例，特别是结合LangSmith使用时，可以更清晰地看到这些事件流。
 
-**5.5 Callbacks（回调）模块：监控和介入Agent执行的各个阶段**
+#### 5.5 Callbacks（回调）模块：监控和介入Agent执行的各个阶段
 
 我们也在4.5节初步介绍了Callbacks。对于高级Agent定制，Callbacks是非常强大的工具。
 
@@ -3119,8 +3093,6 @@ LangChain社区和文档中通常会有关于如何处理Agent流式输出的最
 
 第五章的内容也比较深入，涉及了Agent运作的更多细节和控制方法。
 
-好的，我们进入手册的第三部分，开始探索一个旨在标准化AI与外部工具交互的更宏观的概念：模型上下文协议 (MCP)。
-
 **第三部分：模型上下文协议 (MCP) 与外部工具集成进阶**
 
 在前面的章节中，我们主要聚焦于使用LangChain框架来构建AI Agent，并通过LangChain的`Tool`抽象来与外部功能进行交互。这种方式非常强大和灵活，但通常情况下，每个工具的实现和Agent调用它的方式都与特定的Agent框架（如LangChain）或特定的LLM API（如OpenAI的Tool Calling）紧密相关。
@@ -3129,9 +3101,9 @@ LangChain社区和文档中通常会有关于如何处理Agent流式输出的最
 
 这就是**模型上下文协议 (Model Context Protocol, MCP)** 试图解决的问题。
 
-**第6章：理解模型上下文协议 (MCP)**
+### 第6章：理解模型上下文协议 (MCP)
 
-**6.1 为什么需要MCP？解决什么问题？**
+#### 6.1 为什么需要MCP？解决什么问题？
 
 想象一下当前互联网的运作方式。我们有各种各样的Web浏览器（Chrome, Firefox, Safari等）和数百万计的Web服务器。它们之所以能够顺畅地通信，是因为它们都遵循一组共同的协议，其中最核心的就是HTTP（超文本传输协议）。HTTP定义了浏览器如何请求网页、服务器如何响应、数据如何格式化等等。
 
@@ -3167,7 +3139,7 @@ LangChain社区和文档中通常会有关于如何处理Agent流式输出的最
 
 它们都提供了一种标准化的方式来连接和交互不同的组件。
 
-**6.2 MCP的核心概念**
+#### 6.2 MCP的核心概念
 
 虽然MCP的具体规范可能仍在演进和完善中（作为一个开放协议，它依赖于社区的共识和采纳），但通常会包含以下一些核心概念：
 
@@ -3221,7 +3193,7 @@ LangChain社区和文档中通常会有关于如何处理Agent流式输出的最
     *   **4. 执行 (Execution)**: MCP Server接收到调用请求，验证参数，然后执行该Tool对应的内部逻辑。
     *   **5. 响应 (Response)**: MCP Server将Tool的执行结果（成功时的输出数据，或失败时的错误信息）按照MCP定义的格式返回给MCP Client。
 
-**6.3 MCP与现有LLM工具调用机制（如OpenAI Function Calling/Tool Calling）的关系**
+#### 6.3 MCP与现有LLM工具调用机制（如OpenAI Function Calling/Tool Calling）的关系
 
 这是一个非常值得探讨的问题。OpenAI的Function Calling以及其后续演进的Tool Calling机制，实际上已经为LLM如何请求调用外部函数（工具）提供了一种**事实上的规范**。它定义了LLM如何输出结构化的JSON来描述其意图。
 
@@ -3237,7 +3209,7 @@ LangChain社区和文档中通常会有关于如何处理Agent流式输出的最
 
 **因此，MCP并不是要取代OpenAI的Tool Calling，而是可以与之协同工作，或者为其提供一个更广阔的、标准化的应用舞台。** 一个支持MCP的Agent框架，当其内部的LLM（例如OpenAI模型）生成Tool Calling请求时，可以将这个请求转换成MCP协议格式，发送给MCP Server。
 
-**6.4 MCP生态系统概览（现有工具、SDK等）**
+#### 6.4 MCP生态系统概览（现有工具、SDK等）
 
 MCP作为一个相对较新的理念（虽然其背后的思想——如RPC、微服务API——并不新鲜），其生态系统仍在积极发展中。
 
@@ -3270,13 +3242,11 @@ MCP作为一个相对较新的理念（虽然其背后的思想——如RPC、�
 
 在下一节（第7章），我们将更具体地探讨如何实践MCP，例如如何看待和尝试使用像CodeBox-AI这样的工具，以及如何将MCP的理念融入到我们使用LangChain构建Agent的过程中。
 
-好的，我们继续探讨模型上下文协议（MCP）的实践方面。
-
-**第7章：实践MCP：使用现有的MCP兼容工具及融入LangChain**
+### 第7章：实践MCP：使用现有的MCP兼容工具及融入LangChain**
 
 在理解了MCP的理念和目标之后，我们自然会思考如何在实际项目中应用它。虽然MCP的生态系统仍在发展，但我们已经可以通过一些方式来实践其核心思想，并为未来更广泛的MCP采纳做好准备。
 
-**7.1 案例研究：CodeBox-AI——一个MCP的先行者**
+#### 7.1 案例研究：CodeBox-AI——一个MCP的先行者
 
 CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/activepieces/codebox-ai)) 是一个很好的具体案例，可以帮助我们理解MCP Server是如何运作的，以及它能提供什么价值。
 
@@ -3400,7 +3370,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
     ```
     **重要提示**: 上述`_run_code_in_codebox`函数中的`requests.post`部分和`payload`的构造是**高度假设性**的。您**必须**参考CodeBox-AI（或任何其他MCP Server）的**实际API文档**来了解正确的请求URL、方法、头部、请求体格式以及响应体格式。这里的代码只是为了展示如何将一个外部API调用封装成LangChain Tool。
 
-**7.2 其他MCP工具的探索与集成思路**
+#### 7.2 其他MCP工具的探索与集成思路
 
 除了CodeBox-AI这样的专用代码执行MCP Server，未来可能会出现更多遵循MCP理念的工具提供者。例如：
 
@@ -3415,7 +3385,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
 3.  **封装为LangChain Tool**: 使用`@tool`或`StructuredTool`将这些函数包装成LangChain工具，提供清晰的名称、描述和参数模式 (`args_schema`)，以便LLM能够理解和调用。
 4.  **更新Agent**: 将新创建的工具添加到Agent的工具列表中，并更新Agent的系统提示，告知其新工具的能力和使用场景。
 
-**7.3 将MCP理念融入我们现有的LangChain Agent**
+#### 7.3 将MCP理念融入我们现有的LangChain Agent
 
 即使不直接与一个严格遵循完整MCP规范的外部Server交互，我们也可以在我们自己构建的Agent和工具中借鉴和应用MCP的核心理念：
 
@@ -3455,17 +3425,15 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
 
 在手册的最后一部分（第四部分：综合案例与未来展望），我们将尝试回顾并整合所学知识，构思一个更完整的AI助手，并展望AI Agent的未来。
 
-好的，我们进入学习手册的最后一部分，在这里我们将回顾所学，展望未来，并构思一个更综合的AI助手案例。
-
-**第四部分：综合案例与未来展望**
+## 第四部分：综合案例与未来展望
 
 经过前面三个部分的学习，我们已经掌握了AI Agent的核心概念，熟悉了LangChain框架的主要组件（Models, Prompts, Chains, Tools, Memory, Indexes/Retrieval），并初步了解了模型上下文协议（MCP）的理念。现在，是时候将这些知识融会贯通，思考如何构建一个更全面的AI助手，并展望这个激动人心领域的未来。
 
-**第9章：综合案例研究：构建一个多功能AI研究与开发助手**
+### 第9章：综合案例研究：构建一个多功能AI研究与开发助手**
 
 让我们来构思一个稍微复杂一些的AI Agent，它不仅仅能执行单一类型的任务，而是能协助用户进行初步的AI研究与Python代码开发。
 
-**9.1 需求分析与Agent设计**
+#### 9.1 需求分析与Agent设计
 
 *   **目标用户**: AI初学者、研究人员、开发者。
 *   **核心目标**: 帮助用户探索AI概念、查找相关资料、编写和测试Python代码片段、管理简单的项目文件。
@@ -3491,7 +3459,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
     *   当工具执行出错时，会尝试理解错误并告知用户，或尝试其他方法。
     *   所有文件和代码操作严格限制在预定义的安全工作区内。
 
-**9.2 工具选择与实现**
+#### 9.2 工具选择与实现
 
 根据上述功能需求，我们需要为Agent配备以下工具（大部分我们之前已经讨论或实现过）：
 
@@ -3521,7 +3489,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
         4.  **封装成Tool**: 将这个Retriever封装成一个LangChain `Tool`，例如 `search_ai_knowledge_base`。其描述应指明这个工具用于查询关于AI和LangChain的特定知识。
     *   **描述**: “当用户询问关于AI、机器学习、LangChain的特定概念、用法或问题时，使用此工具从内部知识库中检索相关信息。”
 
-**9.3 Agent的构建、调试与优化过程 (回顾与强调)**
+#### 9.3 Agent的构建、调试与优化过程 (回顾与强调)
 
 1.  **LLM选择**: 选择支持Tool Calling的强大聊天模型 (如`gpt-3.5-turbo-0125`或`gpt-4-turbo-preview`)。
 2.  **Prompt工程 (至关重要)**:
@@ -3544,7 +3512,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
     *   **持续优化Prompt和工具描述**: 这是提升Agent性能最直接有效的方法。
     *   **考虑Few-shot示例**: 对于某些复杂的工具使用场景或决策逻辑，可以在Prompt中加入一些成功的交互示例。
 
-**9.4 (可选) 为Agent添加简单的UI界面 (使用Streamlit或Gradio)**
+#### 9.4 (可选) 为Agent添加简单的UI界面 (使用Streamlit或Gradio)
 
 我们之前在`app.py`中已经用Streamlit实现了一个基本的聊天界面。对于这个更复杂的AI研究与开发助手，可以进一步增强UI：
 
@@ -3554,7 +3522,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
 *   **结构化输出的展示**: 如果工具返回的是JSON或其他结构化数据，可以在UI上更友好地展示。
 *   **流式输出增强**: 努力实现Agent思考过程和最终回复的流式输出，以提升用户体验。
 
-**9.5 经验总结与反思**
+#### 9.5 经验总结与反思
 
 构建这个综合案例的过程，本身就是一次宝贵的学习经验。在这个过程中，你会更深刻地体会到：
 
@@ -3566,11 +3534,11 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
 
 ---
 
-**第10章：AI Agent的未来趋势与学习资源**
+### 第10章：AI Agent的未来趋势与学习资源
 
 我们已经一起走过了构建第一个AI Agent的旅程。但AI Agent领域的发展日新月异，这仅仅是一个开始。
 
-**10.1 自主Agent与多Agent系统**
+#### 10.1 自主Agent与多Agent系统
 
 *   **自主Agent (Autonomous Agents)**:
     *   **概念**: 更高程度的自主性，能够在没有人为干预的情况下，设定长期目标、进行复杂规划、从环境中学习并持续优化自身行为。
@@ -3582,7 +3550,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
     *   **例子**: 一个Agent负责用户交互和任务分解，另一个Agent负责信息检索，第三个Agent负责代码生成和执行，它们之间通过消息传递或共享工作空间进行协作。
     *   **LangChain的支持**: LangGraph等LangChain的子项目正在为构建更复杂的、基于图的、可循环的、多Actor（Agent）的系统提供支持。
 
-**10.2 Agent的长期记忆与持续学习**
+#### 10.2 Agent的长期记忆与持续学习
 
 *   **当前记忆的局限**: 我们使用的`ConversationBufferMemory`等主要关注短期对话上下文。`VectorStoreRetrieverMemory`可以实现基于相似性的长期信息检索，但还不是真正的“学习”。
 *   **未来的方向**:
@@ -3590,7 +3558,7 @@ CodeBox-AI ([https://github.com/activepieces/codebox-ai](https://github.com/acti
     *   **从经验中学习**: 如何让Agent从成功和失败的行动中总结经验教训，并用于改进未来的决策（强化学习、模仿学习等思想的融入）。
     *   **知识的动态更新与整合**: Agent如何将其新获取的信息或经验与其已有的知识（包括LLM的预训练知识和外部知识库）进行有效的融合。
 
-**10.3 Agent的安全性、伦理与对齐问题**
+#### 10.3 Agent的安全性、伦理与对齐问题
 
 随着Agent能力的增强，其潜在的风险和伦理问题也日益凸显：
 
@@ -3617,7 +3585,7 @@ AI Agent领域发展迅速，保持学习非常重要：
 *   **开源Agent项目**: 关注GitHub上一些有影响力的开源Agent项目，学习它们的设计思想和实现（同时也要注意它们可能存在的风险和不成熟之处）。
 *   **社区**: 参与相关的Discord频道、论坛、Twitter讨论，与其他开发者交流学习。
 
-**10.5 开启你的Agent探索之旅：下一步行动建议**
+#### 10.5 开启你的Agent探索之旅：下一步行动建议
 
 恭喜你完成了这份AI Agent学习手册的初步旅程！但这仅仅是一个开始。
 

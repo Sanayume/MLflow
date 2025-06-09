@@ -1,0 +1,29 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.1.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+尝试检查文件: /sandbox/outputs/test_output.txt
+文件 'test_output.txt' 存在。
+文件 'test_output.txt' 的内容如下:
+---
+This is a test output from the sandbox.
+---
+列出 /sandbox/outputs/ 目录下的所有文件和文件夹:
+  目录: test_output
+  文件: test_output.txt
+  目录: test_output_persistent

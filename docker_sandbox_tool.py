@@ -8,6 +8,37 @@ from typing import Dict, Any, Optional
 
 import requests
 
+
+# tool_models.py (或者放在 docker_sandbox_tool.py 顶部)
+from langchain_core.pydantic_v1 import BaseModel, Field
+from typing import Optional
+
+class SandboxExecutionInput(BaseModel):
+    code_string: str = Field(
+        description="要在一个安全的、预装机器学习库的Docker容器中执行的完整Python代码字符串。代码中所有文件路径都必须使用Linux风格的正斜杠 '/'。"
+    )
+    script_relative_path: str = Field(
+        default=".",
+        description="你希望将这段代码保存为脚本文件时，脚本文件相对于本次执行的代码区根目录 (`/sandbox/code/`) 的相对路径。例如 '.' (直接在根下), 'preprocessing', 或 'feature_engineering/step1'。请使用简单、有效的目录名，不要使用 '..' 或绝对路径。"
+    )
+    script_filename: str = Field(
+        description="你为生成的Python脚本指定的文件名，必须以 '.py' 结尾。例如 'train_model.py' 或 'data_analysis.py'。"
+    )
+    ai_code_description: str = Field(
+        default="N/A",
+        description="对你将要执行的这段Python代码的简短文字描述（例如“加载数据并进行初步清洗”）。"
+    )
+    ai_code_purpose: str = Field(
+        default="N/A",
+        description="执行这段Python代码的主要目的或预期达成的目标（例如“为后续模型训练准备特征”）。"
+    )
+    use_gpu: bool = Field(
+        default=False,
+        description="如果你的代码需要GPU加速并且宿主机有可用GPU，请将此设为 True。默认为 False (使用CPU)。"
+    )
+
+
+
 # --- Docker和宿主机工作目录配置 ---
 # 这个是你在 `docker build -t mlsandbox:latest ...` 时给镜像起的名字和标签
 DOCKER_IMAGE_NAME = "mlsandbox:latest" 

@@ -1,10 +1,11 @@
 import streamlit as st
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import Tool
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from dotenv import load_dotenv
+from langgraph.checkpoint.memory import MemorySaver
 from local_tools import (
     safe_python_executor, 
     read_local_file, 
@@ -13,18 +14,27 @@ from local_tools import (
     list_directory_items_with_paths, # 新的工具
     make_web_request 
 )
+from langchain_community.tools.file_management import (
+    CopyFileTool,
+    DeleteFileTool,
+    FileSearchTool,
+    ListDirectoryTool,
+    MoveFileTool,
+    ReadFileTool,
+    WriteFileTool,
+)
 
 # 加载环境变量 (OPENAI_API_KEY)
 
-# 导入我们本地定义的工具
+# 导入我们本地定义的工具 
 from local_tools import safe_python_executor
 
 # 1. 初始化LLM
-llm = ChatOpenAI(model="gemini-2.5-flash-preview-05-20-nothinking",base_url="https://yunwu.ai/v1", api_key="sk-l49VZoOM4U0WrNca7q1mJaxQzhEAunTiEnUg9ph70Pv4OtyY") # 或者 gpt-4-turbogem
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-05-20", google_api_key="AIzaSyC6ZrlkGvbvmTQ_zPCLsgS-frZH8QDX5mI") # 或者 gpt-4-turbogem
 
 # In app.py
 # ...
-
+'''
 tools = [
     Tool(
         name="safe_python_executor",
@@ -72,7 +82,17 @@ tools = [
          """
     ),
 ]
-
+'''
+tools = [
+    WriteFileTool(),
+    ReadFileTool(),
+    ListDirectoryTool(),
+    FileSearchTool(),
+    CopyFileTool(),
+    MoveFileTool(),
+    DeleteFileTool(),
+]
+memory = MemorySaver()
 # ... (Agent的Prompt, Agent创建, Agent Executor创建等保持不变)
 
 # 3. 创建Agent的Prompt

@@ -1,0 +1,4 @@
+  File "/sandbox/code/file_io_tests/create_output_file_20250610_001318_928909_create_output_file.py", line 9
+    else:
+    ^^^^
+SyntaxError: invalid syntax

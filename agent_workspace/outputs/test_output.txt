@@ -1,2 +1,1 @@
-This file was written инсульт Docker container.
-你好，世界！from Docker.
+This is a test output from the sandbox.

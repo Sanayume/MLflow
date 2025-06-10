@@ -5,3 +5,4 @@ __pycache__/
 ai_workspace/
 langchain/
 autoML_sandbox_docker/
+mlsandbox.tar

@@ -1,0 +1,54 @@
+Listing contents of: /sandbox/datasets/
+/
+    sample_data.csv
+    test_data_for_read.csv
+CHIRPSdata/
+    chirps_2016.mat
+    chirps_2016_2020.mat
+    chirps_2017.mat
+    chirps_2018.mat
+    chirps_2019.mat
+    chirps_2020.mat
+CHMdata/
+    CHM_2016.mat
+    CHM_2016_2020.mat
+    CHM_2017.mat
+    CHM_2018.mat
+    CHM_2019.mat
+    CHM_2020.mat
+CMORPHdata/
+    CMORPH_2016.mat
+    CMORPH_2016_2020.mat
+    CMORPH_2017.mat
+    CMORPH_2018.mat
+    CMORPH_2019.mat
+    CMORPH_2020.mat
+GSMAPdata/
+    GSMAP_2016.mat
+    GSMAP_2016_2020.mat
+    GSMAP_2017.mat
+    GSMAP_2018.mat
+    GSMAP_2019.mat
+    GSMAP_2020.mat
+IMERGdata/
+    IMERG_2016.mat
+    IMERG_2016_2020.mat
+    IMERG_2017.mat
+    IMERG_2018.mat
+    IMERG_2019.mat
+    IMERG_2020.mat
+PERSIANNdata/
+    PERSIANN_2016.mat
+    PERSIANN_2016_2020.mat
+    PERSIANN_2017.mat
+    PERSIANN_2018.mat
+    PERSIANN_2019.mat
+    PERSIANN_2020.mat
+sm2raindata/
+    sm2rain_2016.mat
+    sm2rain_2016_2020.mat
+    sm2rain_2016_2020processed.mat
+    sm2rain_2017.mat
+    sm2rain_2018.mat
+    sm2rain_2019.mat
+    sm2rain_2020.mat

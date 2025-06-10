@@ -6,3 +6,5 @@ ai_workspace/
 langchain/
 autoML_sandbox_docker/
 mlsandbox.tar
+agent_workspace/datasets/
+agent_workspace/outputs/features/

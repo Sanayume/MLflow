@@ -1,0 +1,5 @@
+成功加载处理后的特征数据，形状: (100, 5)
+模型已保存到: /sandbox/outputs/multi_step_test/linear_regression_model.pkl
+评估指标已保存到: /sandbox/outputs/multi_step_test/evaluation_metrics.json
+均方误差 (MSE): 24.3985
+R-squared (R2): 0.9958

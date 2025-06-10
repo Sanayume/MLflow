@@ -36,6 +36,15 @@ class SandboxExecutionInput(BaseModel):
         default=False,
         description="如果你的代码需要GPU加速并且宿主机有可用GPU，请将此设为 True。默认为 False (使用CPU)。"
     )
+    # --- 新增的字段 ---
+    cpu_core_limit: Optional[float] = Field(
+        default=None,
+        description="(未来功能) 可选参数，用于指定限制容器可以使用的CPU核心数量，例如 1.5。目前仅作为日志记录，暂不生效。"
+    )
+    memory_limit: Optional[str] = Field(
+        default=None,
+        description="(未来功能) 可选参数，用于指定限制容器的内存使用量，例如 '512m' 或 '2g'。目前仅作为日志记录，暂不生效。"
+    )
 
 
 

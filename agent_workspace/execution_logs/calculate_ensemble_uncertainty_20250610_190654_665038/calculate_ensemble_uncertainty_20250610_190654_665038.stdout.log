@@ -1,0 +1,15 @@
+Starting uncertainty calculation for 2016 data...
+Found 132126 NaNs in CHIRPS within CHM valid mask. Attempting to fill...
+CHIRPS filling complete. No NaNs in valid mask.
+Found 233946 NaNs in sm2rain within CHM valid mask. Attempting to fill...
+sm2rain filling complete. No NaNs in valid mask.
+
+--- Uncertainty (Standard Deviation Across Products) Analysis ---
+Total valid uncertainty points: 5617368
+Mean Uncertainty: 1.5381
+Median Uncertainty: 0.4099
+Min Uncertainty: 0.0000
+Max Uncertainty: 127.1336
+Standard Deviation of Uncertainty: 3.1117
+
+Uncertainty calculation process finished.

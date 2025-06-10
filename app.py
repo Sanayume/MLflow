@@ -1,3 +1,5 @@
+# app.py
+
 import streamlit as st
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import AgentExecutor, create_openai_tools_agent
@@ -27,6 +29,8 @@ from langchain_community.tools.file_management import (
     ReadFileTool,
     WriteFileTool,
 )
+
+st.set_page_config(page_title="AutoML Workflow Agent", layout="wide")
 HOST_ROOT_WORKSPACE = os.path.abspath(os.path.join(os.getcwd(), "agent_workspace"))
 CONTAINER_DATASETS_MOUNT_TARGET = "/sandbox/datasets"
 CONTAINER_OUTPUTS_MOUNT_TARGET = "/sandbox/outputs"
@@ -106,7 +110,9 @@ EXECUTE_CODE_TOOL_DESCRIPTION = f"""
 3.  **代码描述与目的**:
     *   通过 `ai_code_description` 参数，提供对你代码的简短描述。
     *   通过 `ai_code_purpose` 参数，说明执行该代码的目的。
-4.  **GPU支持**: 如果你的代码适合并需要GPU加速，可以通过将 `use_gpu` 参数设为 `True` 来请求GPU资源 (能否实际使用取决于宿主机配置)。默认为 `False` (CPU执行)。
+4.  **资源配置**:
+    *   **GPU支持**: 通过 `use_gpu` 参数请求GPU资源。
+    *   **资源限制 (未来功能)**: 你可以指定 `cpu_core_limit` 和 `memory_limit` 参数。尽管它们目前不会实际限制资源，但会被记录下来，用于未来的资源管理。
 5.  **文件系统约定 (极其重要，必须在你的 `code_string` 中严格遵守)**:
     *   **所有文件路径**: 在你的 `code_string` 中，所有文件路径都 **必须** 使用Linux风格的正斜杠 `/` 作为路径分隔符。
     *   **读取数据集**: 你的代码应该从容器内的 `{CONTAINER_DATASETS_MOUNT_TARGET}/` 目录读取数据。
@@ -121,8 +127,26 @@ EXECUTE_CODE_TOOL_DESCRIPTION = f"""
     *   你的 `code_string` 必须是完整且可直接执行的Python脚本内容。
     *   必须包含所有必要的 `import` 语句。
     *   使用 `print()` 语句输出所有重要的结果、指标、状态或日志信息，以便它们能通过stdout返回并被记录。
-7.  **错误处理**: 如果代码执行出错，`stderr`会包含错误信息和Traceback。请仔细分析。
+7.  **错误处理**: 如果代码执行出错，`stderr`会包含错误信息。更重要的是，请检查 `error_type` 字段来快速判断错误的类别。
 
+**工具输出**:
+该工具会返回一个JSON对象（字典），包含以下关键字段：
+- `execution_id` (字符串): 本次执行的唯一ID。
+- `success` (布尔值): 如果脚本成功执行 (退出码为0)，则为 True。
+- `exit_code` (整数): Python脚本的退出码。
+- `error_type` (字符串或null): **新增字段**，提供结构化的错误分类。可能的值包括:
+    - `'PREPARATION_ERROR'`: 容器启动前的错误（如Docker连接、镜像查找）。
+    - `'RUNTIME_ERROR'`: 容器内Python代码执行时出错。
+    - `'TIMEOUT_ERROR'`: 容器执行超时。
+    - `'DOCKER_API_ERROR'`: 其他与Docker守护进程交互时发生的运行时错误。
+    - `null`: 执行成功时此字段为空。
+- `stdout` (字符串): Python脚本的标准输出内容。
+- `stderr` (字符串): Python脚本的标准错误输出内容。
+- `log_directory_host_path` (字符串): 本次执行的所有日志文件在宿主机上保存的目录路径。
+- `execution_duration_seconds` (浮点数): 容器内代码实际执行的耗时。
+- `cpu_core_limit_set` (浮点数或null): **新增字段**，记录你请求的CPU核心限制。
+- `memory_limit_set` (字符串或null): **新增字段**，记录你请求的内存限制。
+- `error_message_preprocessing` / `error_message_runtime`: 具体的错误信息文本。
 **工具输出**:
 该工具会返回一个JSON对象（字典），包含以下关键字段：
 - `execution_id` (字符串): 本次执行的唯一ID，可用于追踪日志。
@@ -233,78 +257,101 @@ agent_executor = AgentExecutor(
     agent=agent,
     tools=tools,
     verbose=True,
-    handle_parsing_errors="请回顾你之前的输出并修正格式。确保工具调用参数是正确的JSON，或者最终答案是纯文本。"
+    handle_parsing_errors=True,  # 处理解析错误
 )
 
 
 # ------------- Streamlit UI部分 -------------
-st.title("本地工具交互AI助手 (LangChain + Streamlit)")
+# ==============================================================================
+#st.set_page_config(page_title="AutoML Workflow Agent", layout="wide")
+st.title("🤖 AutoML Workflow Agent")
 
-# 初始化对话历史 (在Streamlit的session_state中)
+# 初始化对话历史 (仍然使用Message对象)
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# 显示已有的对话消息
-for message_data in st.session_state.chat_history:
-    if message_data["role"] == "user":
+# 显示对话历史
+for message in st.session_state.chat_history:
+    if isinstance(message, HumanMessage):
         with st.chat_message("user"):
-            st.markdown(message_data["content"])
-    elif message_data["role"] == "assistant":
+            st.markdown(message.content)
+    elif isinstance(message, AIMessage) and message.content:
         with st.chat_message("assistant"):
-            st.markdown(message_data["content"])
+            st.markdown(message.content)
 
 # 获取用户输入
-user_input = st.chat_input("请输入你的指令或问题...")
+initial_user_input = st.chat_input("请输入你的指令...")
 
-if user_input:
-    # 显示用户消息
+if initial_user_input:
+    # 立即显示并记录用户的初次输入
     with st.chat_message("user"):
-        st.markdown(user_input)
+        st.markdown(initial_user_input)
+    st.session_state.chat_history.append(HumanMessage(content=initial_user_input))
+
+    # --- 最终优化的错误反馈逻辑 ---
     
-    # 添加用户消息到对话历史
-    st.session_state.chat_history.append({"role": "user", "content": user_input})
-
-    # 调用Agent Executor处理输入
-    # 将 LangChain 的 HumanMessage/AIMessage 转换为字典以便存储
-    langchain_chat_history = []
-    for msg in st.session_state.chat_history:
-        if msg["role"] == "user":
-            langchain_chat_history.append(HumanMessage(content=msg["content"]))
-        elif msg["role"] == "assistant":
-            # 这里的content可能包含复杂的AIMessage对象，需要处理
-            # 简单起见，我们假设之前的assistant消息是纯文本
-            # 实际上，如果之前的AIMessage包含tool_calls，处理会更复杂
-            # 对于简单的历史，可以只传递文本内容
-            langchain_chat_history.append(AIMessage(content=msg["content"]))
-            # 如果AIMessage有tool_calls，需要正确地构造它。
-            # agent_executor需要的是Message对象列表
-
-    # 准备调用agent_executor的输入
-    # 注意：LangChain Agent期望的chat_history是Message对象的列表
-    # 我们需要转换存储的字典历史
-    processed_history = []
-    # 查找AIMessage中可能存在的tool_calls，因为它们是agent_executor正确工作所必需的
-    # 这是简化处理，实际应用中可能需要更仔细地管理ToolMessage的重建
-    temp_langchain_history = []
-    for h_msg in st.session_state.chat_history[:-1]: # 除了当前用户输入外的所有历史
-        if h_msg['role'] == 'user':
-            temp_langchain_history.append(HumanMessage(content=h_msg['content']))
-        elif h_msg['role'] == 'assistant':
-             # 这里需要更精细地处理，如果AIMessage有tool_calls，则需要重建AIMessage(content="", tool_calls=[...])
-             # 简单处理：
-            temp_langchain_history.append(AIMessage(content=h_msg['content']))
-
-
-    response = agent_executor.invoke({
-        "input": user_input,
-        "chat_history": temp_langchain_history # 传递处理过的对话历史
-    })
+    # 准备第一次调用的输入
+    current_input = initial_user_input
     
-    ai_response_content = response["output"]
+    with st.spinner("思考中..."):
+        try:
+            # 直接调用agent_executor
+            response = agent_executor.invoke({
+                "input": current_input,
+                "chat_history": st.session_state.chat_history[:-1] # 传递到当前用户输入之前的所有历史
+            })
+            
+            # 如果invoke成功，没有抛出任何异常
+            ai_response_content = response["output"]
 
-    # 显示AI回复
-    with st.chat_message("assistant"):
-        st.markdown(ai_response_content)
-        
-    # 添加AI回复到对话历史
-    st.session_state.chat_history.append({"role": "assistant", "content": ai_response_content})
+            # 显示AI的最终回复
+            with st.chat_message("assistant"):
+                st.markdown(ai_response_content)
+                
+            # 将AI的最终成功回复添加到历史
+            st.session_state.chat_history.append(AIMessage(content=ai_response_content))
+
+        except Exception as e:
+            # 如果invoke在任何步骤失败了（包括我们关心的ValidationError）
+            print(f"--- [Agent Error Caught] 捕获到异常: {e} ---")
+            
+            # 格式化错误信息，准备作为新的输入反馈给Agent
+            error_feedback_prompt = f"""
+            我在尝试执行你上一步的计划时遇到了一个错误。请分析下面的错误信息，并修正你之前的工具调用或计划。
+
+            **错误信息:**
+            ```
+            {str(e)}
+            ```
+
+            请根据这个错误，重新生成一个正确的工具调用。
+            """
+            
+            # 将这个错误反馈作为新的输入，再次调用Agent
+            with st.spinner("检测到错误，尝试自我修正..."):
+                try:
+                    # 我们将错误反馈也作为HumanMessage添加到历史中，让上下文更清晰
+                    st.session_state.chat_history.append(HumanMessage(content=error_feedback_prompt))
+
+                    # 再次调用，但这次的input是我们的错误反馈
+                    # 历史记录现在包含了原始输入和我们的错误反馈
+                    corrected_response = agent_executor.invoke({
+                        "input": error_feedback_prompt, 
+                        "chat_history": st.session_state.chat_history[:-1] # 传递包含原始输入但不包含我们刚发的错误反馈的历史
+                    })
+
+                    ai_response_content = corrected_response["output"]
+
+                    # 显示修正后的最终回复
+                    with st.chat_message("assistant"):
+                        st.markdown(ai_response_content)
+                    
+                    # 将最终的成功回复添加到历史
+                    st.session_state.chat_history.append(AIMessage(content=ai_response_content))
+
+                except Exception as final_e:
+                    # 如果在修正后再次调用仍然失败
+                    final_error_message = f"抱歉，在尝试自我修正后，我仍然遇到了一个问题：\n\n```\n{final_e}\n```"
+                    with st.chat_message("assistant"):
+                        st.error(final_error_message)
+                    st.session_state.chat_history.append(AIMessage(content=final_error_message))

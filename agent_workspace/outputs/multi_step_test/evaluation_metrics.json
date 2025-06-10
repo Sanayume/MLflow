@@ -1,0 +1,6 @@
+{
+    "model_type": "LinearRegression",
+    "mean_squared_error": 24.398455484066393,
+    "r2_score": 0.9957756718356136,
+    "trained_model_path": "multi_step_test/linear_regression_model.pkl"
+}

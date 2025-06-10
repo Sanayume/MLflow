@@ -1,0 +1,8 @@
+Original CHIRPS NaNs in CHM valid mask: 132126
+Final CHIRPS NaNs in CHM valid mask after fill: 0
+Original sm2rain NaNs in CHM valid mask: 233946
+Final sm2rain NaNs in CHM valid mask after fill: 0
+
+Missing value imputation complete for CHIRPS and sm2rain data.
+CHIRPS data has been filled. Remaining NaNs in CHM valid mask:  0
+sm2rain data has been filled. Remaining NaNs in CHM valid mask:  0

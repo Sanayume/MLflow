@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/sandbox/code/error_tests/test_runtime_error_20250610_154156_876241_test_runtime_error.py", line 6, in <module>
+    c = a / b
+        ~~^~~
+ZeroDivisionError: division by zero

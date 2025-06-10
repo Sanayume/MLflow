@@ -1,0 +1,3 @@
+PyMC3 or ArviZ not installed. Skipping Bayesian modeling.
+Please ensure your environment has PyMC3 and ArviZ installed to perform Bayesian analysis.
+PyMC3 or ArviZ not installed. Cannot perform Bayesian analysis.

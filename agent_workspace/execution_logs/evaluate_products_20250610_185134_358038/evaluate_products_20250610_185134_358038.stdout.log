@@ -1,0 +1,26 @@
+--- Evaluating CMORPH ---
+Valid data points for CMORPH: 28040796
+RMSE for CMORPH: 6.8278
+Pearson Correlation for CMORPH: 0.4407
+
+--- Evaluating GSMAP ---
+Valid data points for GSMAP: 28040796
+RMSE for GSMAP: 4.7586
+Pearson Correlation for GSMAP: 0.6591
+
+--- Evaluating IMERG ---
+Valid data points for IMERG: 28040796
+RMSE for IMERG: 6.2216
+Pearson Correlation for IMERG: 0.5204
+
+--- Evaluating PERSIANN ---
+Valid data points for PERSIANN: 28040796
+RMSE for PERSIANN: 5.9934
+Pearson Correlation for PERSIANN: 0.4416
+
+--- Evaluating sm2rain ---
+Valid data points for sm2rain: 28040796
+RMSE for sm2rain: 4.8585
+Pearson Correlation for sm2rain: 0.5743
+
+--- Evaluation of all products complete ---

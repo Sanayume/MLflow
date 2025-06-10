@@ -1,0 +1,4 @@
+成功加载数据: /sandbox/outputs/multi_step_test/raw_data.csv, 形状: (100, 6)
+处理后的特征已保存到: /sandbox/outputs/multi_step_test/features.pkl
+标准化器已保存到: /sandbox/outputs/multi_step_test/scaler.pkl
+处理后的特征形状: (100, 5)

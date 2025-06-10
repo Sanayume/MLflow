@@ -1,0 +1,2 @@
+Successfully loaded /sandbox/datasets/CHIRPSdata/chirps_2016_2020.mat. Keys in the .mat file are:
+- data: shape=(144, 256, 1827), dtype=float64

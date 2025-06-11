@@ -1,0 +1,15 @@
+/sandbox/code/feature_engineering/generate_features_20250610_222302_169095_generate_features.py:90: RuntimeWarning: Mean of empty slice
+  mean_all_products = np.nanmean(all_raw_data_masked, axis=2)
+/usr/local/lib/python3.12/dist-packages/numpy/lib/_nanfunctions_impl.py:2015: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/sandbox/code/feature_engineering/generate_features_20250610_222302_169095_generate_features.py:98: RuntimeWarning: All-NaN slice encountered
+  median_all_products = np.nanmedian(all_raw_data_masked, axis=2)
+/sandbox/code/feature_engineering/generate_features_20250610_222302_169095_generate_features.py:102: RuntimeWarning: All-NaN slice encountered
+  max_all_products = np.nanmax(all_raw_data_masked, axis=2)
+/sandbox/code/feature_engineering/generate_features_20250610_222302_169095_generate_features.py:106: RuntimeWarning: All-NaN slice encountered
+  min_all_products = np.nanmin(all_raw_data_masked, axis=2)
+Traceback (most recent call last):
+  File "/sandbox/code/feature_engineering/generate_features_20250610_222302_169095_generate_features.py", line 179, in <module>
+    lagged_data[:lag, :] = np.nan # Fill initial lag values with NaN
+    ~~~~~~~~~~~^^^^^^^^^
+ValueError: cannot convert float NaN to integer

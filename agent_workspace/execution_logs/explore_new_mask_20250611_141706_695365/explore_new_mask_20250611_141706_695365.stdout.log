@@ -1,0 +1,7 @@
+Variables in mask.mat: dict_keys(['__header__', '__version__', '__globals__', 'mask'])
+Variable 'mask':
+  Shape: (144, 256)
+  Dtype: uint8
+  Min value: 0
+  Max value: 1
+An error occurred while loading or processing mask.mat: name 'np' is not defined

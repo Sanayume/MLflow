@@ -1,0 +1,9 @@
+成功加载文件: /sandbox/datasets/rainfalldata/CHIRPSdata/chirps_2016.mat
+文件中的变量键:
+- __header__
+- __version__
+- __globals__
+- data
+找到第一个数据变量键: 'data'
+变量 'data' 的形状: (144, 256, 366)
+变量 'data' 的数据类型: float64

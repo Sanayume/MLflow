@@ -1,0 +1,7 @@
+--- Listing /sandbox/datasets/mask/ ---
+['mask.mat']
+Skipping direct read of file with unknown extension: mask.mat
+
+--- Listing /sandbox/datasets/rainfalldata/ ---
+['CHIRPSdata', 'CHMdata', 'CMORPHdata', 'GSMAPdata', 'IMERGdata', 'PERSIANNdata', 'sm2raindata']
+Skipping direct read of file with unknown extension: CHIRPSdata

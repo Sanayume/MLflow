@@ -1,0 +1,5 @@
+Listing files in /sandbox/datasets/rainfalldata/CHIRPSdata/:
+['chirps_2016.mat', 'chirps_2016_2020.mat', 'chirps_2017.mat', 'chirps_2018.mat', 'chirps_2019.mat', 'chirps_2020.mat']
+
+Listing files in /sandbox/datasets/rainfalldata/CMORPHdata/:
+['CMORPH_2016.mat', 'CMORPH_2016_2020.mat', 'CMORPH_2017.mat', 'CMORPH_2018.mat', 'CMORPH_2019.mat', 'CMORPH_2020.mat']

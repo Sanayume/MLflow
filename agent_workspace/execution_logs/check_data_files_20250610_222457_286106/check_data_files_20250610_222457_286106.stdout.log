@@ -1,0 +1,9 @@
+尝试加载掩码文件: /sandbox/datasets/mask/mask.mat
+成功加载 mask.mat 文件。
+mask_matrix 的形状: (144, 256)
+mask_matrix 的数据类型: float64
+mask_matrix 中大于等于1的值的数量: 15371
+mask_matrix 中大于等于2的值的数量 (长江流域): 2943
+
+列出 /sandbox/datasets/rainfalldata 目录下的 .mat 文件:
+在 /sandbox/datasets/rainfalldata 目录中未找到 .mat 文件。请确保数据已放置。

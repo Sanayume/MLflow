@@ -43,26 +43,128 @@ RUN python3.12 -m pip --version
 # 设置工作目录
 WORKDIR /app
 
+# (新步骤) 卸载由apt安装的、可能与pip安装冲突的包
+RUN apt-get remove -y python3-blinker
+
 # 安装常用的机器学习库
 # 使用 python3.12 -m pip 来确保使用的是与python3.12关联的pip
 # 并且添加 --break-system-packages 选项来处理PEP 668，因为我们是在构建Docker镜像，
 # 这个环境是隔离的。
 # 或者，更好的方式是创建一个虚拟环境并在其中安装，但这会改变后续执行命令的方式。
 # 对于Docker镜像，通常我们会直接安装到Python路径下。
-# 考虑使用一个标记文件来允许pip修改系统包，这比直接用--break-system-packages更“官方”一些
+# 考虑使用一个标记文件来允许pip修改系统包，这比直接用--break-system-packages更"官方"一些
 # RUN touch /usr/lib/python3.12/EXTERNALLY-MANAGED # 这行通常不起作用，是发行版控制的
 
 # 方案A: 使用 --break-system-packages (更直接，在Docker构建中风险可控)
 RUN python3.12 -m pip install --no-cache-dir --upgrade pip --break-system-packages && \
     python3.12 -m pip install --no-cache-dir --break-system-packages \
-    numpy \
-    pandas \
-    scikit-learn \
+    aiohappyeyeballs \
     matplotlib \
-    seaborn \
-    jupyterlab 
-    # torch torchvision torchaudio 
-    # tensorflow 
+    aiohttp \
+    aiosignal \
+    aiosqlite \
+    altair \
+    annotated-types \
+    anthropic \
+    anyio \
+    attrs \
+    blinker \
+    cachetools \
+    certifi \
+    charset-normalizer \
+    click \
+    colorama \
+    dataclasses-json \
+    distro \
+    docker \
+    filetype \
+    frozenlist \
+    gitdb \
+    GitPython \
+    google-ai-generativelanguage \
+    google-api-core \
+    google-auth \
+    googleapis-common-protos \
+    greenlet \
+    grpcio \
+    grpcio-status \
+    h11 \
+    httpcore \
+    httpx \
+    httpx-sse \
+    idna \
+    Jinja2 \
+    jiter \
+    jsonpatch \
+    jsonpointer \
+    jsonschema \
+    jsonschema-specifications \
+    langchain \
+    langchain-anthropic \
+    langchain-community \
+    langchain-core \
+    langchain-google-genai \
+    langchain-openai \
+    langchain-text-splitters \
+    langgraph \
+    langgraph-checkpoint \
+    langgraph-checkpoint-sqlite \
+    langgraph-prebuilt \
+    langgraph-sdk \
+    langsmith \
+    MarkupSafe \
+    marshmallow \
+    multidict \
+    mypy_extensions \
+    narwhals \
+    numpy \
+    openai \
+    orjson \
+    ormsgpack \
+    packaging \
+    pandas \
+    pillow \
+    propcache \
+    proto-plus \
+    protobuf \
+    pyarrow \
+    pyasn1 \
+    pyasn1_modules \
+    pydantic \
+    pydantic_core \
+    pydantic-settings \
+    pydeck \
+    python-dateutil \
+    python-dotenv \
+    pytz \
+    PyYAML \
+    referencing \
+    regex \
+    requests \
+    requests-toolbelt \
+    rpds-py \
+    rsa \
+    smmap \
+    sniffio \
+    SQLAlchemy \
+    sqlite-vec \
+    streamlit \
+    tavily-python \
+    tenacity \
+    tiktoken \
+    toml \
+    tornado \
+    tqdm \
+    typing_extensions \
+    typing-inspect \
+    typing-inspection \
+    tzdata \
+    urllib3 \
+    watchdog \
+    xxhash \
+    yarl \
+    zstandard\
+    scipy
 
 # (可选) 如果你有本地的脚本或配置文件需要复制到镜像中
 # COPY ./my_script.py /app/my_script.py

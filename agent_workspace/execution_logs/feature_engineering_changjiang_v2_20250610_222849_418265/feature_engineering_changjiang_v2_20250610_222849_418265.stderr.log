@@ -1,0 +1,11 @@
+/sandbox/code/feature_engineering/feature_engineering_changjiang_v2_20250610_222849_418265_feature_engineering_changjiang_v2.py:131: RuntimeWarning: Mean of empty slice
+  window_feature[i, :] = stat_func(raw_feature_data_masked[i-window+1 : i+1, :], axis=0)
+/usr/local/lib/python3.12/dist-packages/numpy/lib/_nanfunctions_impl.py:2015: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/sandbox/code/feature_engineering/feature_engineering_changjiang_v2_20250610_222849_418265_feature_engineering_changjiang_v2.py:131: RuntimeWarning: All-NaN slice encountered
+  window_feature[i, :] = stat_func(raw_feature_data_masked[i-window+1 : i+1, :], axis=0)
+Traceback (most recent call last):
+  File "/sandbox/code/feature_engineering/feature_engineering_changjiang_v2_20250610_222849_418265_feature_engineering_changjiang_v2.py", line 131, in <module>
+    window_feature[i, :] = stat_func(raw_feature_data_masked[i-window+1 : i+1, :], axis=0)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: <lambda>() got an unexpected keyword argument 'axis'

@@ -1,0 +1,54 @@
+Starting feature engineering process...
+Ensured output directory exists: /sandbox/outputs/features/
+Loading mask file...
+Mask loaded. Number of masked points in Yangtze River basin: 2943
+Total number of days to process: 1827 from 2016-01-01 to 2020-12-31
+
+--- Loading and masking all raw rainfall data ---
+  Loading data for product: CMORPH
+  Warning: File /sandbox/datasets/rainfalldata/CMORPH_2016_2020.mat not found. Skipping product CMORPH. Filling with NaNs.
+  Loading data for product: CHIRPS
+  Warning: File /sandbox/datasets/rainfalldata/CHIRPS_2016_2020.mat not found. Skipping product CHIRPS. Filling with NaNs.
+  Loading data for product: GSMAP
+  Warning: File /sandbox/datasets/rainfalldata/GSMAP_2016_2020.mat not found. Skipping product GSMAP. Filling with NaNs.
+  Loading data for product: IMERG
+  Warning: File /sandbox/datasets/rainfalldata/IMERG_2016_2020.mat not found. Skipping product IMERG. Filling with NaNs.
+  Loading data for product: PERSIANN
+  Warning: File /sandbox/datasets/rainfalldata/PERSIANN_2016_2020.mat not found. Skipping product PERSIANN. Filling with NaNs.
+  Loading data for product: SM2RAIN
+  Warning: File /sandbox/datasets/rainfalldata/SM2RAIN_2016_2020.mat not found. Skipping product SM2RAIN. Filling with NaNs.
+  Loading data for product: CHM
+  Warning: File /sandbox/datasets/rainfalldata/CHM_2016_2020.mat not found. Skipping product CHM. Filling with NaNs.
+
+--- Calculating Basic Information Features ---
+  Saved 长江_raw_CMORPH.npy
+  Saved 长江_raw_CHIRPS.npy
+  Saved 长江_raw_GSMAP.npy
+  Saved 长江_raw_IMERG.npy
+  Saved 长江_raw_PERSIANN.npy
+  Saved 长江_raw_SM2RAIN.npy
+  Saved 长江_raw_CHM.npy
+
+--- Calculating Multi-Product Synergy Features ---
+  Saved 长江_mean_all_products.npy
+  Saved 长江_std_all_products.npy
+  Saved 长江_median_all_products.npy
+  Saved 长江_max_all_products.npy
+  Saved 长江_min_all_products.npy
+  Saved 长江_range_all_products.npy
+  Saved 长江_count_raining_products.npy
+  Saved 长江_cv_all_products.npy
+
+--- Calculating Temporal Dynamic Features ---
+  Saved 长江_sin_day_of_year.npy
+  Saved 长江_cos_day_of_year.npy
+  Saved seasonal one-hot features.
+  Calculating Lag and Difference Features...
+  Saved 长江_mean_all_products_lag1.npy
+  Saved 长江_mean_all_products_lag2.npy
+  Saved 长江_mean_all_products_lag3.npy
+  Saved 长江_diff_1_mean_all_products.npy
+  Saved 长江_std_all_products_lag1.npy
+  Saved 长江_std_all_products_lag2.npy
+  Saved 长江_std_all_products_lag3.npy
+  Saved 长江_diff_1_std_all_products.npy

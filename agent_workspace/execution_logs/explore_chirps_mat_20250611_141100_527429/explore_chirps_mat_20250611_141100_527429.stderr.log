@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/sandbox/code/explore_chirps_mat_20250611_141100_527429_explore_chirps_mat.py", line 2, in <module>
+    import scipy.io
+ModuleNotFoundError: No module named 'scipy'

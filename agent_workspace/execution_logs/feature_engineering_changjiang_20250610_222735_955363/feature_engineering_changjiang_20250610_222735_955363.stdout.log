@@ -1,0 +1,27 @@
+--- Step 1: Load Mask and Prepare Time Index ---
+Mask loaded. Spatial shape: 144x256. Yangtze River basin points: 2943
+Time range from 2016-01-01 to 2020-12-31. Total days: 1827
+--- Step 2: Generate and Save Time Features ---
+Saved 长江_sin_day_of_year.npy and 长江_cos_day_of_year.npy
+Saved seasonal one-hot features.
+--- Step 3: Process Product by Product ---
+Processing product: CMORPH
+Warning: CMORPH data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+Processing product: CHIRPS
+Warning: CHIRPS data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+Processing product: GSMAP
+Warning: GSMAP data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+Processing product: IMERG
+Warning: IMERG data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+Processing product: PERSIANN
+Warning: PERSIANN data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+Processing product: SM2RAIN
+Warning: SM2RAIN data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+Processing product: CHM
+Warning: CHM data shape (144, 256, 1827) does not match expected (1827, 144, 256). Skipping.
+--- Step 4: Calculate Multi-Product Synergy Features ---
+Not all product raw data was loaded successfully. Skipping multi-product synergy features and dependent features.
+--- Step 5: Calculate High-Order Interaction Features ---
+Skipping some high-order interaction features due to missing dependency: [Errno 2] No such file or directory: '/sandbox/outputs/长江特征工程/长江_std_all_products.npy'
+--- Feature Engineering Complete ---
+All generated .npy files are saved in: /sandbox/outputs/长江特征工程/

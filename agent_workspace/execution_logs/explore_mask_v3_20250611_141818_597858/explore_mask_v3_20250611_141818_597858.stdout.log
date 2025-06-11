@@ -1,0 +1,8 @@
+成功加载文件: /sandbox/datasets/mask/mask.mat
+文件中的变量 (keys): dict_keys(['__header__', '__version__', '__globals__', 'data', 'Latlim', 'Lonlim', 'RasterSize', 'SourceCRS'])
+变量 'data' 的形状: (46, 127)
+变量 'data' 的数据类型: float64
+变量 'data' 的唯一值: [ 1. nan]
+变量 'data' 的最小值: nan
+变量 'data' 的最大值: nan
+变量 'data' 包含除0和1以外的值，可能不是一个纯粹的二进制掩膜。

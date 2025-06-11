@@ -1,0 +1,21 @@
+Loading mask from: /sandbox/datasets/mask/mask.mat
+Mask shape: (144, 256), unique values: [0. 1. 2.]
+Processing CHIRPS from: /sandbox/datasets/rainfalldata/CHIRPSdata/chirps_2016_2020.mat
+CHIRPS data shape: (144, 256, 1827)
+CHIRPS average rainfall shape: (144, 256)
+Processing CMORPH from: /sandbox/datasets/rainfalldata/CMORPHdata/CMORPH_2016_2020.mat
+CMORPH data shape: (144, 256, 1827)
+CMORPH average rainfall shape: (144, 256)
+Processing GSMAP from: /sandbox/datasets/rainfalldata/GSMAPdata/GSMAP_2016_2020.mat
+GSMAP data shape: (144, 256, 1827)
+GSMAP average rainfall shape: (144, 256)
+Processing IMERG from: /sandbox/datasets/rainfalldata/IMERGdata/IMERG_2016_2020.mat
+IMERG data shape: (144, 256, 1827)
+IMERG average rainfall shape: (144, 256)
+Processing PERSIANN from: /sandbox/datasets/rainfalldata/PERSIANNdata/PERSIANN_2016_2020.mat
+PERSIANN data shape: (144, 256, 1827)
+PERSIANN average rainfall shape: (144, 256)
+Processing sm2rain from: /sandbox/datasets/rainfalldata/sm2raindata/sm2rain_2016_2020.mat
+sm2rain data shape: (144, 256, 1827)
+sm2rain average rainfall shape: (144, 256)
+Visualization saved to: /sandbox/outputs/average_rainfall_china_2016_2020.png

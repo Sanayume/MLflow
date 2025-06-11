@@ -1,0 +1,6 @@
+Loaded mask file: /sandbox/datasets/mask/mask.mat
+Variables in mask.mat:
+  - data: shape=(144, 256), dtype=float64
+    Unique values: [0. 1. 2.]
+    Min value: 0.0
+    Max value: 2.0

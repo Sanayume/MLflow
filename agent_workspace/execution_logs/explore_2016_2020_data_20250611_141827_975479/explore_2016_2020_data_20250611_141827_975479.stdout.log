@@ -1,0 +1,15 @@
+--- 检查文件: CHIRPS_2016_2020 (/sandbox/datasets/rainfalldata/CHIRPSdata/chirps_2016_2020.mat) ---
+文件中的变量 (keys): dict_keys(['__header__', '__version__', '__globals__', 'data'])
+变量 'data' 的形状: (144, 256, 1827)
+变量 'data' 的数据类型: float64
+变量 'data' 的最小值: 0.0
+变量 'data' 的最大值: 330.51495361328125
+变量 'data' 中 NaN 值的数量: 39309732
+
+--- 检查文件: CMORPH_2016_2020 (/sandbox/datasets/rainfalldata/CMORPHdata/CMORPH_2016_2020.mat) ---
+文件中的变量 (keys): dict_keys(['__header__', '__version__', '__globals__', 'data'])
+变量 'data' 的形状: (144, 256, 1827)
+变量 'data' 的数据类型: float32
+变量 'data' 的最小值: 0.0
+变量 'data' 的最大值: 379.8000183105469
+变量 'data' 中 NaN 值的数量: 39309732

@@ -1,0 +1,12 @@
+/sandbox/code/feature_engineering/feature_engineering_changjiang_v3_20250610_222941_858443_feature_engineering_changjiang_v3.py:155: RuntimeWarning: Mean of empty slice
+  window_feature[i, :] = stat_func(raw_feature_data_masked[i-window+1 : i+1, :], axis=0)
+/usr/local/lib/python3.12/dist-packages/numpy/lib/_nanfunctions_impl.py:2015: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/sandbox/code/feature_engineering/feature_engineering_changjiang_v3_20250610_222941_858443_feature_engineering_changjiang_v3.py:155: RuntimeWarning: All-NaN slice encountered
+  window_feature[i, :] = stat_func(raw_feature_data_masked[i-window+1 : i+1, :], axis=0)
+/sandbox/code/feature_engineering/feature_engineering_changjiang_v3_20250610_222941_858443_feature_engineering_changjiang_v3.py:26: RuntimeWarning: All-NaN slice encountered
+  max_vals = np.nanmax(arr, axis=axis)
+/sandbox/code/feature_engineering/feature_engineering_changjiang_v3_20250610_222941_858443_feature_engineering_changjiang_v3.py:27: RuntimeWarning: All-NaN slice encountered
+  min_vals = np.nanmin(arr, axis=axis)
+/usr/local/lib/python3.12/dist-packages/scipy/ndimage/_filters.py:1963: RuntimeWarning: Mean of empty slice
+  _nd_image.generic_filter(input, function, footprint, output, mode,

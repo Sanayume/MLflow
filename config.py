@@ -1,6 +1,7 @@
 # config.py
 import os
-
+from dotenv import load_dotenv
+load_dotenv('.env')
 # --- Docker & Sandbox Configuration ---
 DOCKER_IMAGE_NAME = "mlsandbox:latest"
 
@@ -28,6 +29,8 @@ DB_CONFIG = {
     'database': os.getenv('DB_DATABASE', 'automl_agent_db'),
     'port': int(os.getenv('DB_PORT', 3306)) # 确保端口是整数
 }
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+#  print(GOOGLE_API_KEY)
 
 # --- Logging Configuration ---
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO').upper()

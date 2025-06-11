@@ -47,23 +47,23 @@ from db_tools import (
     query_execution_history,
     query_ml_results_from_db,
 )
-from config import (SYSTEM_PROMPT, 
+from config import (
+        GOOGLE_API_KEY,
+        SYSTEM_PROMPT, 
         EXECUTE_CODE_TOOL_DESCRIPTION,
         SYSTEM_PROMPT_2,
         QUERY_EXEC_LOGS_TOOL_DESCRIPTION,
         QUERY_ML_RESULTS_TOOL_DESCRIPTION,
         SAVE_ML_RESULT_TOOL_DESCRIPTION
 )
-
+print(f"GOOGLE_API_KEY: {GOOGLE_API_KEY}")  
 st.set_page_config(page_title="AutoML Workflow Agent", layout="wide")
-
-# 加载环境变量 (OPENAI_API_KEY)
 
 # 导入我们本地定义的工具 
 from local_tools import safe_python_executor
 
 # 1. 初始化LLM
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-05-20", google_api_key=) # 或者 gpt-4-turbogem
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-05-20", google_api_key=GOOGLE_API_KEY)
 
 execute_in_ml_sandbox_tool = StructuredTool.from_function(
     func=execute_ml_code_in_docker, # 指向我们健壮的后端函数

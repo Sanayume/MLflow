@@ -30,7 +30,7 @@ DB_CONFIG = {
     'port': int(os.getenv('DB_PORT', 3306)) # 确保端口是整数
 }
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-#  print(GOOGLE_API_KEY)
+#print(GOOGLE_API_KEY)
 
 # --- Logging Configuration ---
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO').upper()
@@ -113,127 +113,83 @@ EXECUTE_CODE_TOOL_DESCRIPTION = f"""
 在生成 `code_string` 之前，请仔细思考任务的步骤，并确保代码的健壮性。
 执行后，请务必分析工具返回的 `success`, `stdout`, 和 `stderr` 来判断任务是否成功，并从中提取关键信息进行后续决策或向用户报告。
 """
-# 来自 config.py 的 ExecutionErrorType，确保在 app.py 中可访问
-# from config import ExecutionErrorType (如果 ExecutionErrorType 定义在 config.py)
 
 QUERY_EXEC_LOGS_TOOL_DESCRIPTION = f"""
-此工具名为 'QuerySystemExecutionLogs'，用于查询过去代码执行的系统级日志和元数据记录 (这些记录来自名为 'execution_runs' 的数据库表)。
-它主要帮助你了解过去代码执行的“过程”、“状态”以及相关的日志文件位置。
+此工具名为 'QuerySystemExecutionLogs'，用于查询过去代码执行的系统级日志和元数据记录。
+它帮助你了解过去代码执行的“过程”、“状态”以及相关的日志文件位置。
 
-**输入参数 (一个JSON对象，包含以下可选的筛选、排序和分页键):**
-- `query_description` (字符串, 必需): 你对想要查询的系统执行日志信息的自然语言描述。例如：“查找最近一次执行失败的脚本”或“显示所有与'data_preprocessing.py'相关的执行记录”。
+**输入参数 (一个JSON对象/字典，包含以下键):**
+- `query_description` (字符串, 必需): 你对想要查询的系统执行日志信息的自然语言描述。例如：“查找最近一次执行失败的脚本”或“显示所有与'data_preprocessing.py'相关的执行记录”。工具会尝试根据此描述进行合理查询，但你也可以提供更精确的筛选参数。
 - `execution_id_filter` (字符串, 可选): 如果你知道某次具体执行的唯一ID，可以通过此参数精确查找该条记录。
-- `script_filename_filter` (字符串, 可选): 按AI在执行时指定的脚本文件名进行筛选。这是一个部分匹配，例如输入 'train' 会匹配 'train_model.py' 和 'initial_train.py'。
-- `success_status_filter` (布尔值, 可选): 按代码执行是否成功进行筛选 (True 表示成功退出码为0, False 表示失败)。
-- `error_type_filter` (字符串, 可选): 按特定的错误类型进行筛选，以帮助诊断问题。有效值包括: `{[e.value for e in ExecutionErrorType]}`。
-- `description_contains_filter` (字符串, 可选): 筛选执行时AI提供的代码描述 (`ai_code_description`) 中包含指定文本的记录。
-- `purpose_contains_filter` (字符串, 可选): 筛选执行时AI提供的代码目的 (`ai_code_purpose`) 中包含指定文本的记录。
-- `limit` (整数, 可选, 默认10, 最小1, 最大50): 控制返回的最大记录条数。
-- `offset` (整数, 可选, 默认0): 用于分页，跳过前面指定数量的记录。
-- `sort_by_column` (字符串, 可选, 默认 'timestamp_utc_start'): 指定用于排序结果的列名。常用的可排序列包括：'id', 'execution_id', 'timestamp_utc_start', 'script_filename_by_ai', 'success', 'exit_code', 'execution_duration_seconds', 'total_tool_duration_seconds', 'error_type', 'created_at'。
-- `sort_order` (字符串, 可选, 默认 'DESC'): 排序顺序，可以是 'ASC' (升序) 或 'DESC' (降序)。默认最新的记录在前。
+- `script_filename_contains` (字符串, 可选): 筛选AI在执行时指定的脚本文件名中包含特定文本的记录 (部分匹配)。例如输入 'train' 会匹配 'train_model.py'。
+- `only_successful_runs` (布尔值, 可选): 如果设为 `True`，只返回成功执行的记录。如果设为 `False`，只返回失败的记录。如果省略或为 `None`，则不按成功状态筛选。
+- `limit` (整数, 可选, 默认5, 最小1, 最大20): 控制返回的最大记录条数。
 
-**工具输出 (一个JSON对象，包含以下键):**
-- `results` (列表): 一个包含符合查询条件的执行日志记录的列表。如果找不到匹配项，则为空列表。每个记录是一个字典，包含以下主要字段：
-    - `id`: 数据库中的记录ID。
-    - `execution_id`: 该次执行的唯一ID。
-    - `timestamp_utc_start`: 执行开始的UTC时间戳 (ISO格式)。
-    - `timestamp_utc_end_process`: 整个工具处理完成的UTC时间戳 (ISO格式)。
-    - `script_filename_by_ai`: AI指定的脚本名。
-    - `script_relative_path_by_ai`: AI指定的脚本相对路径。
-    - `ai_code_description`: AI提供的代码描述。
-    - `ai_code_purpose`: AI提供的代码目的。
-    - `use_gpu_requested`: 是否请求了GPU。
-    - `success`: 代码是否成功执行 (布尔值)。
-    *   `exit_code`: 代码执行的退出码。
-    *   `execution_duration_seconds`: 容器内代码实际执行的耗时（秒）。
-    *   `total_tool_duration_seconds`: `ExecutePythonInMLSandbox`工具整体执行耗时（秒）。
-    *   `error_type`: 如果执行失败，记录的错误类型 (字符串，来自预定义枚举)。
-    *   `error_message_preprocessing`: 执行前发生的错误信息。
-    *   `error_message_runtime`: 执行中或执行后发生的错误信息。
-    *   `log_directory_host_path`: 本次执行的所有日志文件（代码副本、stdout、stderr、元数据）在宿主机上保存的目录的绝对路径。
-    *   `code_executed_host_path`: 本次执行的代码副本在宿主机上的绝对路径。
-    *   `stdout_log_file_host_path`: 本次执行的stdout日志文件在宿主机上的绝对路径。
-    *   `stderr_log_file_host_path`: 本次执行的stderr日志文件在宿主机上的绝对路径。
-    *   `metadata_file_host_path`: 本次执行的元数据JSON文件在宿主机上的绝对路径。
-    *   `stdout_summary`: stdout内容的摘要 (前1000字符)。
-    *   `stderr_summary`: stderr内容的摘要 (前1000字符)。
-    *   `created_at`: 数据库记录创建时间。
-- `query_executed_approx` (字符串, 可选): (供调试用) 后端实际执行的SQL查询语句的近似表示。
-- `error` (字符串, 可选): 如果查询过程中发生任何错误，则包含错误信息。如果成功，则为 `None`。
+**工具输出 (一个JSON对象/字典，包含以下键):**
+- `results` (列表): 一个包含符合查询条件的执行日志记录的列表 (按执行开始时间降序排列，最新的在前)。如果找不到匹配项，则为空列表。每个记录是一个字典，包含执行的详细元数据，如：
+    - `execution_id`, `timestamp_utc_start`, `script_filename_by_ai`, `ai_code_description`, `ai_code_purpose`,
+    - `success`, `exit_code`, `execution_duration_seconds`, `error_type` (如果失败),
+    - `log_directory_host_path` (包含所有日志文件的宿主机目录路径),
+    - `stdout_summary` (stdout前1000字符), `stderr_summary` (stderr前1000字符)。
+- `query_details` (字典, 可选): 包含本次查询实际使用的参数和（近似的）执行的SQL语句，供调试参考。
+- `error` (字符串, 可选): 如果查询过程中发生任何错误，则包含错误信息。
 
 **使用场景:**
 当你需要回顾过去代码执行的详细情况、诊断失败原因、查看特定脚本的执行历史、或者了解系统最近的活动时，请使用此工具。
-例如，你可以查询“最近3次执行失败且脚本名包含'train'的记录”，或者“查找execution_id为'abc_123'的执行详情”。
 **注意**: 此工具返回的是系统级的执行日志。如果你想查询AI提取和保存的“机器学习成果”（如模型指标），请使用 `QueryMachineLearningResults` 工具。
 """
 
 SAVE_ML_RESULT_TOOL_DESCRIPTION = """
 此工具名为 'SaveMachineLearningResult'，用于将你从 `ExecutePythonInMLSandbox` 工具成功执行后的 `stdout` 中分析和提取出来的、
-结构化的机器学习结果（例如模型评估指标、特征得分、超参数、数据摘要等）以JSON格式保存到专门的 'ml_results' 数据库表中。
+结构化的机器学习结果（例如模型评估指标、特征得分、超参数、数据摘要等）以JSON格式保存到专门的数据库表中。
 这有助于我们构建一个有价值的机器学习实验成果知识库。
 
-**输入参数 (一个JSON对象，包含以下键):**
-- `execution_id` (字符串, 必需): 产生这些机器学习结果的原始代码执行的唯一ID。你必须从 `ExecutePythonInMLSandbox` 工具成功执行后的返回结果中获取这个 `execution_id`，或者通过 `QuerySystemExecutionLogs` 工具查询得到。这是将ML成果与原始代码执行关联起来的关键。
+**输入参数 (一个JSON对象/字典，包含以下键):**
+- `execution_id` (字符串, 必需): **极其重要!** 这是产生这些机器学习结果的原始代码执行的唯一ID。你必须从 `ExecutePythonInMLSandbox` 工具成功执行后的返回结果中获取这个 `execution_id`，或者通过 `QuerySystemExecutionLogs` 工具查询得到。这是将ML成果与原始代码执行关联起来的关键。
 - `result_data` (JSON对象/Python字典, 必需): 这是核心！一个包含你提取和结构化的机器学习结果的JSON对象。这个JSON的结构完全由你根据当前任务和结果的性质来定义。力求清晰、信息完整且易于后续解析。
-    *   **示例1 (模型评估)**: `{"task_type": "binary_classification", "model_name": "LogisticRegression_v1", "dataset_ref": "processed_customer_data.csv", "metrics": {"accuracy": 0.92, "precision": 0.88, "recall": 0.90, "f1_score": 0.89, "roc_auc": 0.95}, "parameters_used": {"C": 1.0, "solver": "liblinear"}}`
-    *   **示例2 (特征重要性)**: `{"method": "SHAP_values", "target_variable": "conversion", "top_features": [{"name": "time_on_site", "importance": 0.45}, {"name": "pages_viewed", "importance": 0.30}, {"name": "referral_source_google", "importance": 0.15}]}`
-    *   **示例3 (数据摘要)**: `{"dataset_name": "raw_sales_data.csv", "num_rows": 150000, "num_columns": 25, "missing_value_summary": {"column_A": 0.05, "column_C": 0.12}, "key_numerical_stats": {"sales_amount": {"mean": 120.50, "std": 45.20, "median": 110.0}}}`
-- `result_type` (字符串, 可选): 你为这组机器学习结果定义的类型或类别，方便后续筛选和理解。例如：'model_evaluation_metrics', 'feature_importance_scores', 'data_profile_summary', 'hyperparameter_tuning_best_trial', 'anomaly_detection_report_summary'。请尽量使用一致且有意义的类型。
-- `result_name` (字符串, 可选): 你为这组具体结果起的独特名称或标识，使其易于识别和引用。例如：'Experiment_XGBoost_Run005_ValidationSet_Eval', 'CustomerChurn_LGBM_FeatureImportances_V3', 'SalesData_Q1_2025_Profiling'。
-- `ai_analysis_notes` (字符串, 可选): 你对这组结果的任何额外文字分析、解释、观察、遇到的挑战、或下一步的建议。这可以是对 `result_data` JSON 的补充说明，或者记录下你对这些结果的“思考”。
+    *   **示例 (模型评估)**: `{"task_type": "binary_classification", "model_name": "LogisticRegression_v1", "metrics": {"accuracy": 0.92, "f1_score": 0.89}}`
+- `result_type` (字符串, 可选): 你为这组机器学习结果定义的类型或类别，方便后续筛选和理解。例如：'model_evaluation_metrics', 'feature_importance_scores', 'data_profile_summary'。请尽量使用一致且有意义的类型。
+- `result_name` (字符串, 可选): 你为这组具体结果起的独特名称或标识，使其易于识别和引用。例如：'Experiment_XGBoost_Run005_Validation_Eval', 'CustomerChurn_LGBM_Features_V3'。
+- `ai_analysis_notes` (字符串, 可选): 你对这组结果的任何额外文字分析、解释、观察、遇到的挑战、或下一步的建议。
 
-**工具输出 (一个JSON对象，包含以下键):**
+**工具输出 (一个JSON对象/字典，包含以下键):**
 - `success` (布尔值): 如果结果成功保存到数据库，则为 True。
 - `ml_result_id` (整数, 可选): 如果成功，这是新创建的机器学习结果记录在数据库中的ID。
-- `message` (字符串, 可选): 操作成功时的确认消息。
-- `error` (字符串, 可选): 如果保存过程中发生错误（例如数据库错误、输入无效），则包含错误类型代码。
-- `message` (字符串, 可选): 如果发生错误，这里可能包含更详细的错误描述。
+- `message` (字符串): 操作成功或失败的确认/错误消息。
+- `error_type` (字符串, 可选): 如果保存失败，可能包含一个错误分类代码。
 
 **使用场景:**
-1.  你调用 `ExecutePythonInMLSandbox` 执行了一段代码（例如模型训练和评估脚本）。
-2.  该工具成功返回 (`success: True`)，并且其 `stdout` 中包含了你期望的机器学习结果（例如打印出的评估指标、特征列表等）。
+1.  你调用 `ExecutePythonInMLSandbox` 执行了一段代码。
+2.  该工具成功返回 (`success: True`)，并且其 `stdout` 中包含了你期望的机器学习结果。
 3.  你仔细分析这个 `stdout`，提取出关键的、结构化的信息。
 4.  你将这些信息构造成一个有意义的JSON对象，作为 `result_data` 参数。
 5.  然后，你调用此 `SaveMachineLearningResult` 工具，传入从步骤1获取的 `execution_id` 以及你构造的 `result_data` 和其他可选信息。
-这样做可以确保我们重要的实验发现被妥善记录和追踪。
 """
 
 QUERY_ML_RESULTS_TOOL_DESCRIPTION = f"""
-此工具名为 'QueryMachineLearningResults'，用于查询过去由AI（你或其他执行）分析并保存到数据库 'ml_results' 表中的结构化机器学习成果和指标。
+此工具名为 'QueryMachineLearningResults'，用于查询过去由AI（你或其他执行）分析并保存到数据库的结构化机器学习成果和指标。
 它帮助你回顾和比较“具体的ML结论、指标和分析”。
 
-**输入参数 (一个JSON对象，包含以下可选的筛选、排序和分页键):**
+**输入参数 (一个JSON对象/字典，包含以下键):**
 - `query_description` (字符串, 必需): 你对想要查询的已保存ML成果信息的自然语言描述。例如：“查找所有关于XGBoost模型的评估结果”或“显示与执行ID 'abc_123'关联的所有已保存成果”。
 - `execution_id_filter` (字符串, 可选): 按产生该ML成果的原始代码执行的ID (`execution_id`) 进行精确筛选。
-- `result_type_filter` (字符串, 可选): 按ML成果的类型 (`result_type`) 进行部分匹配筛选。例如输入 'evaluation' 会匹配 'model_evaluation_metrics'。
-- `result_name_filter` (字符串, 可选): 按ML成果的名称 (`result_name`) 进行部分匹配筛选。例如输入 'ResNet50' 会匹配 'ResNet50_Accuracy_V1'。
-- `limit` (整数, 可选, 默认5, 最小1, 最大30): 控制返回的最大ML成果记录条数。
-- `offset` (整数, 可选, 默认0): 用于分页，跳过前面指定数量的记录。
-- `sort_by_column` (字符串, 可选, 默认 'result_timestamp_utc'): 指定用于排序结果的列名。允许的列包括：'id', 'execution_run_id', 'result_timestamp_utc', 'result_type', 'result_name', 'created_at'。
-- `sort_order` (字符串, 可选, 默认 'DESC'): 排序顺序，可以是 'ASC' (升序) 或 'DESC' (降序)。默认最新的成果在前。
+- `result_type_contains` (字符串, 可选): 筛选成果类型 (`result_type`) 中包含特定文本的记录 (部分匹配)。例如输入 'evaluation' 会匹配 'model_evaluation_metrics'。
+- `result_name_contains` (字符串, 可选): 筛选成果名称 (`result_name`) 中包含特定文本的记录 (部分匹配)。例如输入 'ResNet50' 会匹配 'ResNet50_Accuracy_V1'。
+- `limit` (整数, 可选, 默认3, 最小1, 最大10): 控制返回的最大ML成果记录条数。
 
-**工具输出 (一个JSON对象，包含以下键):**
-- `results` (列表): 一个包含符合查询条件的ML成果记录的列表。如果找不到匹配项，则为空列表。每个记录是一个字典，包含以下主要字段：
-    - `id`: 该ML成果记录在数据库中的ID。
-    - `execution_run_id`: 关联的原始代码执行的ID。
-    - `result_timestamp_utc`: AI保存此成果的UTC时间戳 (ISO格式)。
-    - `result_type`: AI定义的成果类型。
-    - `result_name`: AI定义的成果名称。
+**工具输出 (一个JSON对象/字典，包含以下键):**
+- `results` (列表): 一个包含符合查询条件的ML成果记录的列表 (按保存时间降序排列，最新的在前)。如果找不到匹配项，则为空列表。每个记录是一个字典，包含：
+    - `id` (ML成果记录ID), `execution_run_id` (关联的执行ID),
+    - `result_timestamp_utc` (保存时间), `result_type`, `result_name`,
     - `result_data_json` (JSON对象/Python字典): **核心内容！** 这是AI之前保存的结构化机器学习成果。你需要自行解析这个JSON对象以获取具体的指标或数据。
-    - `ai_analysis_notes`: AI之前保存的对此成果的分析笔记。
-    - `created_at`: 数据库记录创建时间。
-- `query_executed_approx` (字符串, 可选): (供调试用) 后端实际执行的SQL查询语句的近似表示。
-- `error` (字符串, 可选): 如果查询过程中发生任何错误，则包含错误信息。如果成功，则为 `None`。
+    - `ai_analysis_notes` (AI的分析笔记)。
+- `query_details` (字典, 可选): 包含本次查询实际使用的参数和（近似的）执行的SQL语句，供调试参考。
+- `error` (字符串, 可选): 如果查询过程中发生任何错误，则包含错误信息。
 
 **使用场景:**
-当你需要：
-- 回顾特定实验（通过`execution_id_filter`）产出的所有ML成果。
-- 查找特定类型（通过`result_type_filter`）的所有ML成果，例如比较不同实验的“模型评估指标”。
-- 查找特定命名（通过`result_name_filter`）的ML成果。
-- 基于过去的成果来指导当前的决策或避免重复工作。
+当你需要回顾特定实验产出的所有ML成果、查找特定类型的ML成果（例如比较不同实验的“模型评估指标”）、或基于过去的成果来指导当前决策时使用此工具。
 **注意**: 此工具返回的是AI先前提取和结构化的“ML成果”。如果你想查询代码执行的“过程日志”，请使用 `QuerySystemExecutionLogs` 工具。
-获取到 `result_data_json` 后，你需要在你的思考过程中（或者通过调用 `ExecutePythonInMLSandbox` 工具来编写Python代码处理这个JSON字符串）来提取和使用其中的具体数值。
+获取到 `result_data_json` 后，你需要在你的思考过程中（或者通过调用 `ExecutePythonInMLSandbox` 工具来编写Python代码处理这个JSON）来提取和使用其中的具体数值。
 """
 
 SYSTEM_PROMPT = f"""

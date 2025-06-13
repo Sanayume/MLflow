@@ -36,7 +36,7 @@ if not logger.hasHandlers(): # 防止重复添加处理器，如果此模块被�
 
 # --- Pydantic 输入模型 (简化版，与config.py中的描述对应) ---
 
-class QuerySystemExecutionLogsInput(BaseModel):
+class DatabaseQueryInput(BaseModel):
     """用于查询系统执行日志的输入参数模型。"""
     query_description: str = Field(
         description="对你想要查询的系统执行日志的自然语言描述。"

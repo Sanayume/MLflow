@@ -1,0 +1,7 @@
+加载mask文件失败: /sandbox/datasets/mask/mask.mat. 错误: 'mask'
+正在处理产品: CHIRPS...
+  成功加载 CHIRPS_2016.mat, 数据形状: (144, 256, 366)
+  成功加载 CHIRPS_2017.mat, 数据形状: (144, 256, 365)
+  成功加载 CHIRPS_2018.mat, 数据形状: (144, 256, 365)
+  成功加载 CHIRPS_2019.mat, 数据形状: (144, 256, 365)
+  成功加载 CHIRPS_2020.mat, 数据形状: (144, 256, 366)

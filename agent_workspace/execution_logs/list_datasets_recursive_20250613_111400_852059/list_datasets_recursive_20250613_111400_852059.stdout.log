@@ -1,0 +1,20 @@
+Listing all files in /sandbox/datasets/ recursively:
+/
+    README.md
+mask/
+    mask.mat
+rainfalldata/
+    CHIRPSdata/
+        chirps_2016_2020.mat
+    CHMdata/
+        CHM_2016_2020.mat
+    CMORPHdata/
+        CMORPH_2016_2020.mat
+    GSMAPdata/
+        GSMAP_2016_2020.mat
+    IMERGdata/
+        IMERG_2016_2020.mat
+    PERSIANNdata/
+        PERSIANN_2016_2020.mat
+    sm2raindata/
+        sm2rain_2016_2020.mat

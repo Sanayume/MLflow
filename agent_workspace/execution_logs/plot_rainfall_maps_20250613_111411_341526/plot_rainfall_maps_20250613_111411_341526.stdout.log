@@ -1,0 +1,30 @@
+成功加载mask文件: /sandbox/datasets/mask/mask.mat, mask形状: (144, 256)
+成功加载 CHIRPS 数据文件: /sandbox/datasets/rainfalldata/CHIRPSdata/CHIRPS_2016_2020.mat, 形状: (144, 256, 1827)
+CHIRPS 5年平均降雨量形状: (256, 1827)
+警告: CHIRPS 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 CHIRPS 图像到: /sandbox/outputs/rainfall_maps/CHIRPS_5year_avg_rainfall.png
+成功加载 CHM 数据文件: /sandbox/datasets/rainfalldata/CHMdata/CHM_2016_2020.mat, 形状: (144, 256, 1827)
+CHM 5年平均降雨量形状: (256, 1827)
+警告: CHM 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 CHM 图像到: /sandbox/outputs/rainfall_maps/CHM_5year_avg_rainfall.png
+成功加载 CMORPH 数据文件: /sandbox/datasets/rainfalldata/CMORPHdata/CMORPH_2016_2020.mat, 形状: (144, 256, 1827)
+CMORPH 5年平均降雨量形状: (256, 1827)
+警告: CMORPH 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 CMORPH 图像到: /sandbox/outputs/rainfall_maps/CMORPH_5year_avg_rainfall.png
+成功加载 GSMAP 数据文件: /sandbox/datasets/rainfalldata/GSMAPdata/GSMAP_2016_2020.mat, 形状: (144, 256, 1827)
+GSMAP 5年平均降雨量形状: (256, 1827)
+警告: GSMAP 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 GSMAP 图像到: /sandbox/outputs/rainfall_maps/GSMAP_5year_avg_rainfall.png
+成功加载 IMERG 数据文件: /sandbox/datasets/rainfalldata/IMERGdata/IMERG_2016_2020.mat, 形状: (144, 256, 1827)
+IMERG 5年平均降雨量形状: (256, 1827)
+警告: IMERG 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 IMERG 图像到: /sandbox/outputs/rainfall_maps/IMERG_5year_avg_rainfall.png
+成功加载 PERSIANN 数据文件: /sandbox/datasets/rainfalldata/PERSIANNdata/PERSIANN_2016_2020.mat, 形状: (144, 256, 1827)
+PERSIANN 5年平均降雨量形状: (256, 1827)
+警告: PERSIANN 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 PERSIANN 图像到: /sandbox/outputs/rainfall_maps/PERSIANN_5year_avg_rainfall.png
+成功加载 sm2rain 数据文件: /sandbox/datasets/rainfalldata/sm2raindata/sm2rain_2016_2020.mat, 形状: (144, 256, 1827)
+sm2rain 5年平均降雨量形状: (256, 1827)
+警告: sm2rain 的降雨数据 ((256, 1827)) 与mask ((144, 256)) 形状不匹配，不应用mask。
+成功保存 sm2rain 图像到: /sandbox/outputs/rainfall_maps/sm2rain_5year_avg_rainfall.png
+所有降雨图生成完毕。

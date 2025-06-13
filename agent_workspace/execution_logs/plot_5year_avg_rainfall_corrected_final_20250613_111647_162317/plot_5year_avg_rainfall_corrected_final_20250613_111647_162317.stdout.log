@@ -1,0 +1,37 @@
+Mask data shape: (144, 256)
+Processing CHIRPS...
+Original CHIRPS data shape: (144, 256, 1827)
+5-year average CHIRPS rainfall shape: (144, 256)
+Mask applied for CHIRPS.
+Saved CHIRPS_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/CHIRPS_5year_avg_rainfall.png
+Processing CHM...
+Original CHM data shape: (144, 256, 1827)
+5-year average CHM rainfall shape: (144, 256)
+Mask applied for CHM.
+Saved CHM_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/CHM_5year_avg_rainfall.png
+Processing CMORPH...
+Original CMORPH data shape: (144, 256, 1827)
+5-year average CMORPH rainfall shape: (144, 256)
+Mask applied for CMORPH.
+Saved CMORPH_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/CMORPH_5year_avg_rainfall.png
+Processing GSMAP...
+Original GSMAP data shape: (144, 256, 1827)
+5-year average GSMAP rainfall shape: (144, 256)
+Mask applied for GSMAP.
+Saved GSMAP_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/GSMAP_5year_avg_rainfall.png
+Processing IMERG...
+Original IMERG data shape: (144, 256, 1827)
+5-year average IMERG rainfall shape: (144, 256)
+Mask applied for IMERG.
+Saved IMERG_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/IMERG_5year_avg_rainfall.png
+Processing PERSIANN...
+Original PERSIANN data shape: (144, 256, 1827)
+5-year average PERSIANN rainfall shape: (144, 256)
+Mask applied for PERSIANN.
+Saved PERSIANN_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/PERSIANN_5year_avg_rainfall.png
+Processing sm2rain...
+Original sm2rain data shape: (144, 256, 1827)
+5-year average sm2rain rainfall shape: (144, 256)
+Mask applied for sm2rain.
+Saved sm2rain_5year_avg_rainfall.png to /sandbox/outputs/rainfall_maps/sm2rain_5year_avg_rainfall.png
+All rainfall maps generated and saved.

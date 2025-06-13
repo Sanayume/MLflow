@@ -1,0 +1,37 @@
+Mask data shape: (144, 256)
+Processing CHIRPS...
+Original CHIRPS data shape: (144, 256, 1827)
+5-year average CHIRPS rainfall shape: (144, 256)
+Mask applied for CHIRPS.
+Error processing CHIRPS: name 'outputs_path' is not defined
+Processing CHM...
+Original CHM data shape: (144, 256, 1827)
+5-year average CHM rainfall shape: (144, 256)
+Mask applied for CHM.
+Error processing CHM: name 'outputs_path' is not defined
+Processing CMORPH...
+Original CMORPH data shape: (144, 256, 1827)
+5-year average CMORPH rainfall shape: (144, 256)
+Mask applied for CMORPH.
+Error processing CMORPH: name 'outputs_path' is not defined
+Processing GSMAP...
+Original GSMAP data shape: (144, 256, 1827)
+5-year average GSMAP rainfall shape: (144, 256)
+Mask applied for GSMAP.
+Error processing GSMAP: name 'outputs_path' is not defined
+Processing IMERG...
+Original IMERG data shape: (144, 256, 1827)
+5-year average IMERG rainfall shape: (144, 256)
+Mask applied for IMERG.
+Error processing IMERG: name 'outputs_path' is not defined
+Processing PERSIANN...
+Original PERSIANN data shape: (144, 256, 1827)
+5-year average PERSIANN rainfall shape: (144, 256)
+Mask applied for PERSIANN.
+Error processing PERSIANN: name 'outputs_path' is not defined
+Processing sm2rain...
+Original sm2rain data shape: (144, 256, 1827)
+5-year average sm2rain rainfall shape: (144, 256)
+Mask applied for sm2rain.
+Error processing sm2rain: name 'outputs_path' is not defined
+All rainfall maps generated and saved.

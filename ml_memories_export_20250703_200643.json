@@ -1,0 +1,95 @@
+{
+  "memories": {
+    "3f44e2c3026f": {
+      "content": "User: 我想训练一个图像分类模型\nAgent: 好的，我可以帮你训练图像分类模型。首先需要准备数据集，然后选择合适的神经网络架构。",
+      "memory_type": "conversation",
+      "tags": [],
+      "metadata": {
+        "user_input": "我想训练一个图像分类模型",
+        "agent_response": "好的，我可以帮你训练图像分类模型。首先需要准备数据集，然后选择合适的神经网络架构。",
+        "context": {
+          "task_type": "image_classification",
+          "user_level": "beginner"
+        },
+        "conversation_length": 53
+      },
+      "timestamp": "2025-07-03T20:06:43.063398",
+      "importance": 0.5,
+      "access_count": 0
+    },
+    "40245ee47fbe": {
+      "content": "Tool: preprocess_data\nParameters: {\n  \"dataset_path\": \"images/\",\n  \"target_size\": [\n    224,\n    224\n  ]\n}\nResult: {'processed_images': 1000, 'validation_split': 0.2}",
+      "memory_type": "execution",
+      "tags": [
+        "execution",
+        "success",
+        "preprocess_data"
+      ],
+      "metadata": {
+        "tool_name": "preprocess_data",
+        "parameters": {
+          "dataset_path": "images/",
+          "target_size": [
+            224,
+            224
+          ]
+        },
+        "result": {
+          "processed_images": 1000,
+          "validation_split": 0.2
+        },
+        "success": true,
+        "execution_time": 45.2
+      },
+      "timestamp": "2025-07-03T20:06:43.067188",
+      "importance": 0.7,
+      "access_count": 0
+    },
+    "5694830dfbbc": {
+      "content": "Tool: train_model\nParameters: {\n  \"model_type\": \"CNN\",\n  \"epochs\": 50,\n  \"batch_size\": 32\n}\nResult: {'final_accuracy': 0.89, 'loss': 0.25}",
+      "memory_type": "execution",
+      "tags": [
+        "execution",
+        "train_model",
+        "success"
+      ],
+      "metadata": {
+        "tool_name": "train_model",
+        "parameters": {
+          "model_type": "CNN",
+          "epochs": 50,
+          "batch_size": 32
+        },
+        "result": {
+          "final_accuracy": 0.89,
+          "loss": 0.25
+        },
+        "success": true,
+        "execution_time": 1800.5
+      },
+      "timestamp": "2025-07-03T20:06:43.068289",
+      "importance": 0.7,
+      "access_count": 0
+    }
+  },
+  "insights": {},
+  "statistics": {
+    "total_memories": 3,
+    "total_insights": 0,
+    "memory_types": {
+      "conversation": 1,
+      "execution": 2
+    },
+    "importance_distribution": {
+      "low": 0,
+      "medium": 1,
+      "high": 2
+    },
+    "knowledge_graph_nodes": 3,
+    "knowledge_graph_edges": 0,
+    "data_lineage_nodes": 0,
+    "data_lineage_edges": 0,
+    "average_access_count": 0.0
+  },
+  "export_timestamp": "2025-07-03T20:06:43.069424"
+}

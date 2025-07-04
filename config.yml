@@ -1,0 +1,115 @@
+# AutoML Workflow Agent 配置文件
+# 支持多个API供应商配置
+
+# 默认使用的供应商
+default_provider: "google"
+
+# API供应商配置
+providers:
+  google:
+    name: "Google Gemini"
+    type: "google"
+    enabled: true
+    models:
+      - "gemini-2.5-flash-preview-05-20"
+      - "gemini-1.5-pro"
+      - "gemini-1.5-flash"
+    default_model: "gemini-2.5-flash-preview-05-20"
+    api_key: "${GOOGLE_API_KEY}"  # 从环境变量读取
+    
+  openai:
+    name: "OpenAI"
+    type: "openai"
+    enabled: true
+    base_url: "https://api.openai.com/v1"
+    models:
+      - "gpt-4o"
+      - "gpt-4-turbo"
+      - "gpt-3.5-turbo"
+    default_model: "gpt-4o"
+    api_key: "${OPENAI_API_KEY}"
+    
+  azure:
+    name: "Azure OpenAI"
+    type: "azure"
+    enabled: false
+    base_url: "https://your-resource.openai.azure.com/"
+    models:
+      - "gpt-4"
+      - "gpt-35-turbo"
+    default_model: "gpt-4"
+    api_key: "${AZURE_API_KEY}"
+    api_version: "2023-12-01-preview"
+    deployment_name: "gpt-4"
+    
+  anthropic:
+    name: "Anthropic Claude"
+    type: "anthropic"
+    enabled: false
+    models:
+      - "claude-3-opus-20240229"
+      - "claude-3-sonnet-20240229"
+      - "claude-3-haiku-20240307"
+    default_model: "claude-3-sonnet-20240229"
+    api_key: "${ANTHROPIC_API_KEY}"
+    
+  custom:
+    name: "自定义API"
+    type: "openai_compatible"
+    enabled: false
+    base_url: "http://localhost:11434/v1"  # 例如: Ollama
+    models:
+      - "llama2"
+      - "codellama"
+      - "mistral"
+    default_model: "llama2"
+    api_key: "ollama"
+
+# 应用设置
+app_settings:
+  title: "🤖 Enhanced AutoML Workflow Agent"
+  description: "具备智能记忆、任务规划和增强推理能力的AI助手"
+  page_icon: "🤖"
+  layout: "wide"
+  sidebar_state: "expanded"
+  
+# 功能开关
+features:
+  enhanced_agent: true
+  memory_system: true
+  task_planning: true
+  resource_monitoring: true
+  ml_tools: true
+  history_tracking: true
+  auto_analysis: true
+  smart_preprocessing: true
+  auto_model_selection: false
+  advanced_visualization: true
+
+# 资源监控设置
+resource_monitoring:
+  enabled: true
+  interval_seconds: 5
+  cpu_threshold: 80
+  memory_threshold: 80
+  disk_threshold: 85
+  alert_enabled: true
+
+# 数据库设置
+database:
+  history_db: "agent_workspace/history.db"
+  resource_db: "agent_workspace/resource_monitor.db"
+  cleanup_days: 30
+
+# Docker设置
+docker:
+  image_name: "automl-sandbox"
+  enable_gpu: false
+  memory_limit: "2g"
+  cpu_limit: 1.0
+
+# 日志设置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "agent_workspace/app.log"

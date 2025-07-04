@@ -3,7 +3,13 @@ import json
 import datetime
 import logging
 from wsgiref.validate import validator
-from MySQLdb import IntegrityError
+try:
+    from MySQLdb import IntegrityError
+except ImportError:
+    # Fallback if MySQLdb is not available
+    class IntegrityError(Exception):
+        pass
+
 from mysql.connector import Error as MySQLError
 from typing import Dict, Any, Optional
 from config import ExecutionErrorType # 从config导入

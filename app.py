@@ -58,18 +58,17 @@ from config import (
 )
 print(f"GOOGLE_API_KEY: {GOOGLE_API_KEY}")  
 st.set_page_config(page_title="AutoML Workflow Agent", layout="wide")
-
-# 导入我们本地定义的工具 
+#目前废弃
 from local_tools import safe_python_executor
-
+    
 # 1. 初始化LLM
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-05-20", google_api_key=GOOGLE_API_KEY)
 
 execute_in_ml_sandbox_tool = StructuredTool.from_function(
-    func=execute_ml_code_in_docker, # 指向我们健壮的后端函数
-    name="ExecutePythonInMLSandbox", # 工具的调用名称
-    description=EXECUTE_CODE_TOOL_DESCRIPTION, # 上面定义的详细描述
-    args_schema=SandboxExecutionInput # Pydantic模型定义输入参数
+    func=execute_ml_code_in_docker, 
+    name="ExecutePythonInMLSandbox",
+    description=EXECUTE_CODE_TOOL_DESCRIPTION,
+    args_schema=SandboxExecutionInput 
 )
 query_system_execution_logs_tool = StructuredTool.from_function(
     func=query_execution_history, # 指向 db_utils.py 中的函数

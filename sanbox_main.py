@@ -7,7 +7,7 @@ import datetime
 import json
 import traceback
 import requests
-from enum import Enum # 引入Enum来定义结构化的错误类型
+from enum import Enum
 from config import (
     DOCKER_IMAGE_NAME,
     HOST_ROOT_WORKSPACE,

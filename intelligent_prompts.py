@@ -112,11 +112,18 @@ class IntelligentMLPromptGenerator:
         # 初始化数据库
         self._init_database()
         
-        # 加载预定义模板
-        asyncio.create_task(self._load_predefined_templates())
-        
-        # 加载现有数据
-        asyncio.create_task(self._load_data())
+        # 延迟加载，不在初始化时进行异步操作
+        self._templates_loaded = False
+        self._data_loaded = False
+    
+    async def _ensure_data_loaded(self):
+        """确保数据已加载"""
+        if not self._templates_loaded:
+            await self._load_predefined_templates()
+            self._templates_loaded = True
+        if not self._data_loaded:
+            await self._load_data()
+            self._data_loaded = True
     
     def _init_database(self):
         """初始化SQLite数据库"""

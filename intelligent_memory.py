@@ -101,8 +101,14 @@ class IntelligentMLMemoryManager:
         # 初始化数据库
         self._init_database()
         
-        # 加载现有记忆
-        asyncio.create_task(self._load_memories())
+        # 延迟加载数据，不在初始化时进行异步操作
+        self._data_loaded = False
+    
+    async def _ensure_data_loaded(self):
+        """确保数据已加载"""
+        if not self._data_loaded:
+            await self._load_memories()
+            self._data_loaded = True
     
     def _init_database(self):
         """初始化SQLite数据库"""
